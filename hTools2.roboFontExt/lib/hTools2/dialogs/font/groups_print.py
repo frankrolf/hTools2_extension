@@ -63,7 +63,7 @@ class printGroupsDialog(hDialog):
             delete_groups(font)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def print_callback(self, sender):
         font = CurrentFont()
@@ -72,4 +72,4 @@ class printGroupsDialog(hDialog):
             print_groups(font, mode=_mode)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

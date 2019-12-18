@@ -78,25 +78,25 @@ class deleteLayerDialog(hDialog):
     def apply_callback(self, sender):
         # no font open
         if self.font is None:
-            print no_font_open
+            print(no_font_open)
         # delete layer
         else:
             layers_index = self.w.layers.getSelection()
             layers = [self.layers[i] for i in layers_index]
             if len(layers):
-                print 'deleting layers...\n'
+                print('deleting layers...\n')
                 for layer in layers:
                     if layer in self.font.layerOrder:
-                        print '\tdeleting %s...' % layer
+                        print('\tdeleting %s...' % layer)
                         self.font.removeLayer(layer)
                 self.font.update()
-                print
-                print '...done.\n'
+                print()
+                print('...done.\n')
                 # update UI
                 self.get_font()
                 self.update_ui()
             else:
-                print 'no layer selected.'
+                print('no layer selected.')
 
     def on_close_window(self, sender):
         removeObserver(self, "fontBecameCurrent")

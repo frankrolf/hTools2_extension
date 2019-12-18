@@ -11,8 +11,9 @@ class Arrows(Group):
         'leftUp', 'leftDown', 'rightUp', 'rightDown',
     ]
 
-    def __init__(self, (l, t), s=35, p=10, callbacks=dict(), arrows=None):
+    def __init__(self, xxx_todo_changeme, s=35, p=10, callbacks=dict(), arrows=None):
 
+        (l, t) = xxx_todo_changeme
         w = (s * 3) - 2
         h = w
 
@@ -38,35 +39,35 @@ class Arrows(Group):
             if arrow == 'left':
                 self.left = SquareButton(
                     (x0, y1, s, s),
-                    unichr(8672),
+                    chr(8672),
                     callback=callbacks["left"])
                 self.left.bind("left", [])
 
             if arrow == 'down':
                 self.down = SquareButton(
                     (x1, y2, s, s),
-                    unichr(8675),
+                    chr(8675),
                     callback=callbacks["down"])
                 self.down.bind("down", [])
 
             if arrow == 'right':
                 self.right = SquareButton(
                     (x2, y1, s, s),
-                    unichr(8674),
+                    chr(8674),
                     callback=callbacks["right"])
                 self.right.bind("right", [])
 
             if arrow == 'up':
                 self.up = SquareButton(
                     (x1, y0, s, s),
-                    unichr(8673),
+                    chr(8673),
                     callback=callbacks["up"])
                 self.up.bind("up", [])
 
             if arrow == 'leftUp':
                 self.left_up = SquareButton(
                     (x0, y0, small, small),
-                    unichr(8598),
+                    chr(8598),
                     sizeStyle='small',
                     callback=callbacks["leftUp"])
                 self.left_up.bind("leftUp", [])
@@ -75,7 +76,7 @@ class Arrows(Group):
                 self.left_down = SquareButton(
                     (x0, y2 + (s - small),
                     small, small),
-                    unichr(8601),
+                    chr(8601),
                     sizeStyle='small',
                     callback=callbacks["leftDown"])
                 self.left_down.bind("leftDown", [])
@@ -85,7 +86,7 @@ class Arrows(Group):
                     (x2 + (s - small),
                     y2 + (s - small),
                     small, small),
-                    unichr(8600),
+                    chr(8600),
                     sizeStyle='small',
                     callback=callbacks["rightDown"])
                 self.right_up.bind("rightDown", [])
@@ -94,7 +95,7 @@ class Arrows(Group):
                 self.right_down = SquareButton(
                     (x2 + (s - small), y0,
                     small, small),
-                    unichr(8599),
+                    chr(8599),
                     sizeStyle='small',
                     callback=callbacks["rightUp"])
                 self.right_down.bind("rightUp", [])

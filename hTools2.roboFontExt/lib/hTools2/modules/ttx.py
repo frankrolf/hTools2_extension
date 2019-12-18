@@ -8,7 +8,8 @@ import time
 from fontTools.ttLib import TTFont
 
 import hTools2.modules.sysutils
-reload(hTools2.modules.sysutils)
+import importlib
+importlib.reload(hTools2.modules.sysutils)
 
 from hTools2.modules.sysutils import SuppressPrint
 from hTools2.extras.ElementTree import parse
@@ -117,8 +118,8 @@ def makeDSIG(tt_font):
     tt_font["DSIG"] = newDSIG
     # ugly but necessary -> so all tables are added to ttfont
     # tt_font.lazy = False
-    for key in tt_font.keys():
-        print tt_font[key]
+    for key in list(tt_font.keys()):
+        print(tt_font[key])
 
 def add_DSIG_table(otf_path):
     with SuppressPrint():

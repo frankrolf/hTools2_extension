@@ -14,4 +14,4 @@ if f is not None:
     clear_colors(f)
 
 else:
-    print no_font_open
+    print(no_font_open)

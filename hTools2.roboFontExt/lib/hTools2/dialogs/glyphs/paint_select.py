@@ -1,7 +1,8 @@
 # [h] paint and select glyphs by color
 
 import hTools2.modules.color
-reload(hTools2.modules.color)
+import importlib
+importlib.reload(hTools2.modules.color)
 
 from mojo.roboFont import CurrentFont, CurrentGlyph
 from vanilla import *
@@ -77,17 +78,17 @@ class paintGlyphsDialog(hDialog):
                 g = f[glyph_names[0]]
                 # get glyph color
                 color = g.mark
-                print '%s: %s\n' % (g.name, color)
+                print('%s: %s\n' % (g.name, color))
                 # convert rgba to NSColor
                 nscolor = convert_to_nscolor(*color)
                 # set swatch color
                 self.w.mark_color.set(nscolor)
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def paint_callback(self, sender):
         f = CurrentFont()
@@ -101,23 +102,23 @@ class paintGlyphsDialog(hDialog):
             )
             glyph_names = get_glyphs(f)
             if len(glyph_names) > 0:
-                print 'painting selected glyphs...\n'
-                print '\tcolor: %s %s %s %s' % _mark_color
-                print
-                print '\t',
+                print('painting selected glyphs...\n')
+                print('\tcolor: %s %s %s %s' % _mark_color)
+                print()
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     f[glyph_name].prepareUndo('paint glyph')
                     f[glyph_name].mark = _mark_color
                     f[glyph_name].performUndo()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def select_callback(self, sender):
         f = CurrentFont()
@@ -126,38 +127,38 @@ class paintGlyphsDialog(hDialog):
             if len(glyph_names) > 0:
                 glyph_name = get_glyphs(f)[0]
                 color = f[glyph_name].mark
-                print 'selecting glyphs:\n'
-                print '\t',
+                print('selecting glyphs:\n')
+                print('\t', end=' ')
                 glyph_names = []
                 for glyph in f:
                     if glyph.mark == color:
-                        print glyph.name,
+                        print(glyph.name, end=' ')
                         glyph_names.append(glyph.name)
                 f.selection = glyph_names
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def clear_callback(self, sender):
         f = CurrentFont()
         if f is not None:
             glyph_names = get_glyphs(f)
             if len(glyph_names) > 0:
-                print 'clearing colors from selected glyphs...\n'
-                print '\t\t',
+                print('clearing colors from selected glyphs...\n')
+                print('\t\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     clear_color(f[glyph_name])
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

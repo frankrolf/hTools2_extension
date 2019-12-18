@@ -163,38 +163,38 @@ class actionsDialog(hDialog):
         # batch perform actions
         all_fonts = AllFonts()
         if len(all_fonts) > 0:
-            print 'transforming all open fonts...\n'
+            print('transforming all open fonts...\n')
             self.w.bar.start()
             for font in all_fonts:
-                print '\ttransforming %s...' % get_full_name(font)
+                print('\ttransforming %s...' % get_full_name(font))
                 if self.round:
-                    print '\t\trounding...'
+                    print('\t\trounding...')
                     font.round()
                 if self.decompose:
-                    print '\t\tdecomposing...'
+                    print('\t\tdecomposing...')
                     decompose(font)
                 if self.overlaps:
-                    print '\t\tremoving overlaps...'
+                    print('\t\tremoving overlaps...')
                     font.removeOverlap()
                 if self.order:
-                    print '\t\tauto contour order...'
+                    print('\t\tauto contour order...')
                     auto_contour_order(font)
                 if self.direction:
-                    print '\t\tauto contour direction...'
+                    print('\t\tauto contour direction...')
                     auto_contour_direction(font)
                 if self.extremes:
-                    print '\t\tadding extreme points...'
+                    print('\t\tadding extreme points...')
                     add_extremes(font)
                 if self.save:
-                    print '\t\tsaving font...'
+                    print('\t\tsaving font...')
                     font.save()
                 if self.close:
-                    print '\t\tclosing font...'
+                    print('\t\tclosing font...')
                     font.close()
-                    print
-                print '\t...done.\n'
+                    print()
+                print('\t...done.\n')
             self.w.bar.stop()
-            print '...done.\n'
+            print('...done.\n')
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

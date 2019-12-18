@@ -11,7 +11,7 @@ from fontTools.pens.cocoaPen import CocoaPen
 try:
     from lib.tools.bezierTools import curveConverter
 except:
-    print 'running outside of RoboFont'
+    print('running outside of RoboFont')
 
 from fontTools.pens.basePen import BasePen
 from robofab.pens.pointPen import AbstractPointPen
@@ -52,7 +52,9 @@ def checkInnerOuter(firstAngle, lastAngle):
     if dirAngle <= 0:
         return False
 
-def interSect((seg1s, seg1e), (seg2s, seg2e)):
+def interSect(xxx_todo_changeme5, xxx_todo_changeme6):
+    (seg1s, seg1e) = xxx_todo_changeme5
+    (seg2s, seg2e) = xxx_todo_changeme6
     denom = (seg2e.y - seg2s.y)*(seg1e.x - seg1s.x) - (seg2e.x - seg2s.x)*(seg1e.y - seg1s.y)
     if roundFloat(denom) == 0:
         #print 'parallel: %s' % denom
@@ -65,8 +67,12 @@ def interSect((seg1s, seg1e), (seg2s, seg2e)):
     y = seg1s.y + ua*(seg1e.y - seg1s.y)
     return MathPoint(x, y)
 
-def pointOnACurve((x1, y1), (cx1, cy1), (cx2, cy2), (x2, y2), value):
+def pointOnACurve(xxx_todo_changeme7, xxx_todo_changeme8, xxx_todo_changeme9, xxx_todo_changeme10, value):
     #, handle = False , order = False):
+    (x1, y1) = xxx_todo_changeme7
+    (cx1, cy1) = xxx_todo_changeme8
+    (cx2, cy2) = xxx_todo_changeme9
+    (x2, y2) = xxx_todo_changeme10
     dx = x1
     cx = (cx1 - dx) * 3.0
     bx = (cx2 - cx1) * 3.0 - cx
@@ -251,7 +257,8 @@ class OutlinePen(BasePen):
 
         self.drawSettings()
 
-    def _moveTo(self, (x, y)):
+    def _moveTo(self, xxx_todo_changeme):
+        (x, y) = xxx_todo_changeme
         if self.offset == 0:
             self.outerPen.moveTo((x, y))
             self.innerPen.moveTo((x, y))
@@ -263,7 +270,8 @@ class OutlinePen(BasePen):
         self.firstPoint = p
         self.shouldHandleMove = True
 
-    def _lineTo(self, (x, y)):
+    def _lineTo(self, xxx_todo_changeme1):
+        (x, y) = xxx_todo_changeme1
         if self.offset == 0:
             self.outerPen.lineTo((x, y))
             self.innerPen.lineTo((x, y))
@@ -303,7 +311,10 @@ class OutlinePen(BasePen):
         self.prevPoint = currentPoint
         self.prevAngle = self.currentAngle
 
-    def _curveToOne(self, (x1, y1), (x2, y2), (x3, y3)):
+    def _curveToOne(self, xxx_todo_changeme2, xxx_todo_changeme3, xxx_todo_changeme4):
+        (x1, y1) = xxx_todo_changeme2
+        (x2, y2) = xxx_todo_changeme3
+        (x3, y3) = xxx_todo_changeme4
         if self.offset == 0:
             self.outerPen.curveTo((x1, y1), (x2, y2), (x3, y3))
             self.innerPen.curveTo((x1, y1), (x2, y2), (x3, y3))

@@ -133,18 +133,18 @@ class UFOsToOTFsDialog(hDialog):
                 _release_mode = self.w._release_mode.get()
                 # print settings
                 boolstring = ("False", "True")
-                print 'batch generating .otfs for all fonts in folder...\n'
-                print '\tufos folder: %s' % self.ufos_folder
-                print '\totfs folder: %s' % self.otfs_folder
-                print '\tdecompose: %s' % boolstring[_decompose]
-                print '\tremove overlaps: %s' % boolstring[_overlaps]
-                print '\tautohint: %s' % boolstring[_autohint]
-                print '\trelease mode: %s' % boolstring[_release_mode]
-                print
+                print('batch generating .otfs for all fonts in folder...\n')
+                print('\tufos folder: %s' % self.ufos_folder)
+                print('\totfs folder: %s' % self.otfs_folder)
+                print('\tdecompose: %s' % boolstring[_decompose])
+                print('\tremove overlaps: %s' % boolstring[_overlaps])
+                print('\tautohint: %s' % boolstring[_autohint])
+                print('\trelease mode: %s' % boolstring[_release_mode])
+                print()
                 # batch generate
                 self.w.bar.start()
                 for ufo_path in _ufo_paths:
-                    print '\tgenerating .otf for %s...' % os.path.split(ufo_path)[1]
+                    print('\tgenerating .otf for %s...' % os.path.split(ufo_path)[1])
                     ufo = RFont(ufo_path, showUI=False)
                     # generate otf
                     otf_file = os.path.splitext(os.path.split(ufo_path)[1])[0] + '.otf'
@@ -156,11 +156,11 @@ class UFOsToOTFsDialog(hDialog):
                                 releaseMode=_release_mode)
                     # close
                     ufo.close()
-                    print '\t\totf path: %s' % otf_path
-                    print '\t\tgeneration sucessful? %s\n' % os.path.exists(otf_path)
+                    print('\t\totf path: %s' % otf_path)
+                    print('\t\tgeneration sucessful? %s\n' % os.path.exists(otf_path))
                 # done
                 self.w.bar.stop()
-                print '...done.\n'
+                print('...done.\n')
         # no font in folder
         else:
-            print no_font_in_folder
+            print(no_font_in_folder)

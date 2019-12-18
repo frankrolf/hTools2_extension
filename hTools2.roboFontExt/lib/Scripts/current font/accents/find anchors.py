@@ -23,4 +23,4 @@ if f is not None:
             g.mark = color
 
 else:
-    print no_font_open
+    print(no_font_open)

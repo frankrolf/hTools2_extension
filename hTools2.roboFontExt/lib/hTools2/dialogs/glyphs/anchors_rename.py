@@ -90,14 +90,14 @@ class renameAnchorsDialog(hDialog):
                 new = self.w._new_name_value.get()
                 boolstring = (False, True)
                 # print info
-                print 'renaming anchors in glyphs...\n'
-                print '\told name: %s' % old
-                print '\tnew name: %s' % new
-                print
-                print '\t',
+                print('renaming anchors in glyphs...\n')
+                print('\told name: %s' % old)
+                print('\tnew name: %s' % new)
+                print()
+                print('\t', end=' ')
                 # change anchors names
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     # rename anchor
                     f[glyph_name].prepareUndo('rename anchor')
                     has_name = rename_anchor(f[glyph_name], old, new)
@@ -105,11 +105,11 @@ class renameAnchorsDialog(hDialog):
                     f[glyph_name].update()
                 # done
                 f.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

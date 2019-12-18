@@ -1,7 +1,8 @@
 # [h] hTools2.modules.rasterizer
 
 import hTools2.modules.primitives
-reload(hTools2.modules.primitives)
+import importlib
+importlib.reload(hTools2.modules.primitives)
 
 # imports
 
@@ -30,7 +31,7 @@ def set_element(font, size, type='rect', magic=None, element_src='_element'):
     """
 
     # get destination glyph
-    if font.has_key(element_src) != True:
+    if (element_src in font) != True:
         font.newGlyph(element_src)
     glyph = font[element_src]
 
@@ -142,8 +143,8 @@ class RasterGlyph:
             # get bounding box
             xMin, yMin, xMax, yMax = self.g.box
             xMin, yMin, xMax, yMax = int(xMin), int(yMin), int(xMax), int(yMax)
-            xValues = range(xMin, xMax, res_x)
-            yValues = range(yMin, yMax, res_y)
+            xValues = list(range(xMin, xMax, res_x))
+            yValues = list(range(yMin, yMax, res_y))
             yValues.reverse()
 
             # scan lines
@@ -200,7 +201,7 @@ class RasterGlyph:
         marginRight = white + ' '
 
         # prepare line numbers
-        lineNumbers = self.coordenates.keys()
+        lineNumbers = list(self.coordenates.keys())
         belowBase = []
         aboveBase = []
         for L in lineNumbers:
@@ -215,40 +216,40 @@ class RasterGlyph:
 
         # print glyph info
         line_length = 30
-        print "-" * line_length
-        print "GlyphRasterizer"
-        print "-" * line_length
-        print 'glyph name: %s' % self.g.name
-        print 'left margin: %s' % self.leftMargin
-        print 'right margin: %s' % self.rightMargin
-        print "-" * line_length
-        print
+        print("-" * line_length)
+        print("GlyphRasterizer")
+        print("-" * line_length)
+        print('glyph name: %s' % self.g.name)
+        print('left margin: %s' % self.leftMargin)
+        print('right margin: %s' % self.rightMargin)
+        print("-" * line_length)
+        print()
 
         # print lines above or equal to baseline
         for line in aboveBase:
-            print '%+03d' % line, "\t",
-            print marginLeft * int(self.leftMargin),
+            print('%+03d' % line, "\t", end=' ')
+            print(marginLeft * int(self.leftMargin), end=' ')
             for bit in self.coordenates[str(line)]:
                 if bit == 1:
-                    print black,
+                    print(black, end=' ')
                 else:
-                    print white,
-            print marginRight * int(self.rightMargin)
+                    print(white, end=' ')
+            print(marginRight * int(self.rightMargin))
 
         # print lines below baseline
         for line in belowBase:
-            print '%+03d' % line, "\t",
-            print marginLeft * int(self.leftMargin),
+            print('%+03d' % line, "\t", end=' ')
+            print(marginLeft * int(self.leftMargin), end=' ')
             for bit in self.coordenates[str(line)]:
                 if bit == 1:
-                    print black,
+                    print(black, end=' ')
                 else:
-                    print white,
-            print marginRight * int(self.rightMargin)
+                    print(white, end=' ')
+            print(marginRight * int(self.rightMargin))
 
         # done
-        print
-        print "-" * line_length, "\n"
+        print()
+        print("-" * line_length, "\n")
 
     def rasterize(self, destGlyph=None, res=(125, 125), color=None):
         """
@@ -269,7 +270,7 @@ class RasterGlyph:
 
         # see if glyph has been scanned already
         lib_exists = True
-        if self.g.lib.has_key(self.lib_key_coordenates) is not True:
+        if (self.lib_key_coordenates in self.g.lib) is not True:
             lib_exists = self.scan(res)
 
         if lib_exists:
@@ -278,7 +279,7 @@ class RasterGlyph:
             destGlyph.clear()
 
             # prepare lines
-            lineNumbers = self.g.lib[self.lib_key_coordenates].keys()
+            lineNumbers = list(self.g.lib[self.lib_key_coordenates].keys())
             lineNumbers.sort()
             lineNumbers.reverse()
 

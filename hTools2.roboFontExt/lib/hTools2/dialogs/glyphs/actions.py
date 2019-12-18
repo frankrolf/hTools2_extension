@@ -227,14 +227,14 @@ class glyphActionsDialog(hDialog):
         if f is not None:
             glyph_names = get_glyphs(f)
             if len(glyph_names) > 0:
-                print 'applying actions to selected glyphs...\n'
-                for action in self.actions.keys():
+                print('applying actions to selected glyphs...\n')
+                for action in list(self.actions.keys()):
                     if self.actions[action]:
-                        print '\t%s' % action
-                print
-                print '\t',
+                        print('\t%s' % action)
+                print()
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     # current layer only
                     if not self.actions['all layers']:
                         self.apply_actions(f[glyph_name])
@@ -246,11 +246,11 @@ class glyphActionsDialog(hDialog):
                     # done glyph
                     f[glyph_name].update()
                 # done font
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

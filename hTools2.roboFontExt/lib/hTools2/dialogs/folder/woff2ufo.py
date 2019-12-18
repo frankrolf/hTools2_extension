@@ -92,26 +92,26 @@ class WOFFsToUFOsDialog(hDialog):
                     self.ufos_folder = self.woffs_folder
                 # print settings
                 boolstring = ("False", "True")
-                print 'batch generating ufos for all woffs in folder...\n'
-                print '\twoffs folder: %s' % self.woffs_folder
-                print '\tufos folder: %s' % self.ufos_folder
-                print
+                print('batch generating ufos for all woffs in folder...\n')
+                print('\twoffs folder: %s' % self.woffs_folder)
+                print('\tufos folder: %s' % self.ufos_folder)
+                print()
                 # batch convert
                 self.w.bar.start()
                 for woff_path in _woffs_paths:
-                    print '\tcreating ufo from %s...' % os.path.split(woff_path)[1]
+                    print('\tcreating ufo from %s...' % os.path.split(woff_path)[1])
                     woff = OpenFont(woff_path, showUI=True) # does not work without UI
                     ufo_file = os.path.splitext(os.path.split(woff_path)[1])[0] + '.ufo'
                     ufo_path = os.path.join(self.ufos_folder, ufo_file)
                     woff.save(ufo_path)
                     # close
                     woff.close()
-                    print '\t\tufo path: %s' % ufo_path
-                    print '\t\tconversion sucessful? %s\n' % os.path.exists(ufo_path)
+                    print('\t\tufo path: %s' % ufo_path)
+                    print('\t\tconversion sucessful? %s\n' % os.path.exists(ufo_path))
                 # done
                 self.w.bar.stop()
-                print
-                print '...done.\n'
+                print()
+                print('...done.\n')
         # no font in folder
         else:
-            print no_font_in_folder
+            print(no_font_in_folder)

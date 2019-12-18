@@ -115,12 +115,12 @@ class interpolationPreviewDialog(hDialog, BaseWindowController):
     def on(self):
         addObserver(self, "draw_background", "drawBackground")
         if self.verbose:
-            print 'interpolation preview is ON'
+            print('interpolation preview is ON')
 
     def off(self):
         removeObserver(self, "drawBackground")
         if self.verbose:
-            print 'interpolation preview is OFF'
+            print('interpolation preview is OFF')
 
     def draw_background(self, notification):
         s  = notification['scale']
@@ -148,7 +148,7 @@ class interpolationPreviewDialog(hDialog, BaseWindowController):
         # interpolate steps
         if f1 != f2:
             # check if f2 has this glyph
-            if f2.has_key(g1.name):
+            if g1.name in f2:
                 g2 = f2[g1.name]
                 # check if glyph in f2 is compatible
                 if g1.isCompatible(g2):
@@ -177,7 +177,7 @@ class interpolationPreviewDialog(hDialog, BaseWindowController):
                     # restore()
             else:
                 if self.verbose:
-                    print '%s not in font 2' % g1.name
+                    print('%s not in font 2' % g1.name)
 
 if __name__ == '__main__':
 

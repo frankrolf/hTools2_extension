@@ -196,36 +196,36 @@ class copyFontInfoDialog(hDialog):
         legal = self.w.general_legal_checkbox.get()
         parties = self.w.general_parties_checkbox.get()
         # print info
-        print 'copying font info...\n'
-        print '\tsource font: %s' % source_font_name
-        print '\ttarget font: %s' % dest_font_name
-        print
-        print '\tidentification: %s' % boolstring[identification]
-        print '\tdimensions: %s' % boolstring[dimensions]
-        print '\tlegal: %s' % boolstring[legal]
-        print '\tdesigner & foundry: %s' % boolstring[parties]
-        print
+        print('copying font info...\n')
+        print('\tsource font: %s' % source_font_name)
+        print('\ttarget font: %s' % dest_font_name)
+        print()
+        print('\tidentification: %s' % boolstring[identification])
+        print('\tdimensions: %s' % boolstring[dimensions])
+        print('\tlegal: %s' % boolstring[legal])
+        print('\tdesigner & foundry: %s' % boolstring[parties])
+        print()
         # copy font info
         if identification == True:
-            print '\tcopying identification...'
+            print('\tcopying identification...')
             for attr in self.general_identification_attrs:
                 setattr(dest_font.info, attr, getattr(source_font.info, attr))
         if dimensions == True:
-            print '\tcopying dimensions...'
+            print('\tcopying dimensions...')
             for attr in self.general_dimensions_attrs:
                 setattr(dest_font.info, attr, getattr(source_font.info, attr))
         if legal == True:
-            print '\tcopying legal...'
+            print('\tcopying legal...')
             for attr in self.general_legal_attrs:
                 setattr(dest_font.info, attr, getattr(source_font.info, attr))
         if parties == True:
-            print '\tcopying designer & foundry...'
+            print('\tcopying designer & foundry...')
             for attr in self.general_parties_attrs:
                 setattr(dest_font.info, attr, getattr(source_font.info, attr))
         # done
         dest_font.update()
-        print
-        print '...done.\n'
+        print()
+        print('...done.\n')
 
     def get_fonts(self):
         # get all fonts
@@ -242,7 +242,7 @@ class copyFontInfoDialog(hDialog):
             self.w.dest_value.setItems(self.all_fonts_names)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def on_close_window(self, sender):
         # remove observers on close window

@@ -2,24 +2,25 @@
 
 """A collection of dialogs to do things to the current glyph."""
 
-import align
-reload(align)
+from . import align
+import importlib
+importlib.reload(align)
 
-import nudge
-reload(nudge)
+from . import nudge
+importlib.reload(nudge)
 
-import switch
-reload(switch)
+from . import switch
+importlib.reload(switch)
 
-import interpolation_preview
-reload(interpolation_preview)
+from . import interpolation_preview
+importlib.reload(interpolation_preview)
 
 # import
 
-from align import alignPointsDialog
-from nudge import nudgePointsDialog
-from switch import switchGlyphDialog
-from interpolation_preview import interpolationPreviewDialog
+from .align import alignPointsDialog
+from .nudge import nudgePointsDialog
+from .switch import switchGlyphDialog
+from .interpolation_preview import interpolationPreviewDialog
 
 # export
 

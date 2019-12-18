@@ -8,11 +8,11 @@ def permutations(iterable, r=None):
     r = n if r is None else r
     if r > n:
         return
-    indices = range(n)
-    cycles = range(n, n-r, -1)
+    indices = list(range(n))
+    cycles = list(range(n, n-r, -1))
     yield tuple(pool[i] for i in indices[:r])
     while n:
-        for i in reversed(range(r)):
+        for i in reversed(list(range(r))):
             cycles[i] -= 1
             if cycles[i] == 0:
                 indices[i:] = indices[i+1:] + indices[i:i+1]
@@ -32,10 +32,10 @@ def combinations(iterable, r):
     n = len(pool)
     if r > n:
         return
-    indices = range(r)
+    indices = list(range(r))
     yield tuple(pool[i] for i in indices)
     while True:
-        for i in reversed(range(r)):
+        for i in reversed(list(range(r))):
             if indices[i] != i + n - r:
                 break
         else:

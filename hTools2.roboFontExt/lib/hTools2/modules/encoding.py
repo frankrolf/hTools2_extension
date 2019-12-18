@@ -2,8 +2,9 @@
 
 '''Tools to work with encoding files, character sets etc.'''
 
-import hTools2.modules.unicode
-reload(hTools2.modules.unicode)
+import hTools2.modules.str
+import importlib
+importlib.reload(hTools2.modules.str)
 
 import os
 
@@ -12,7 +13,7 @@ try:
 except ImportError:
     from robofab.world import CurrentFont, OpenFont
 
-from hTools2.modules.unicode import *
+from hTools2.modules.str import *
 from hTools2.modules.color import clear_colors, hls_to_rgb
 
 def import_encoding(file_path):
@@ -32,7 +33,7 @@ def import_encoding(file_path):
                 glyph_names.append(line.strip())
         return glyph_names
     else:
-        print 'Error, this file does not exist.'
+        print('Error, this file does not exist.')
 
 def extract_encoding(ufo_path, enc_path=None):
     '''
@@ -128,11 +129,11 @@ def import_groups_from_encoding(enc_path):
 
 def set_glyph_order(font, enc_path, verbose=False, create_templates=True, create_glyphs=False):
     if verbose:
-        print 'setting glyph order...'
+        print('setting glyph order...')
     glyph_names = import_encoding(enc_path)
     glyph_order = []
     for glyph_name in glyph_names:
-        if glyph_name in font.keys():
+        if glyph_name in list(font.keys()):
             glyph_order.append(glyph_name)
         else:
             # add new glyph
@@ -140,20 +141,20 @@ def set_glyph_order(font, enc_path, verbose=False, create_templates=True, create
                 font.newGlyph(glyph_name)
                 glyph_order.append(glyph_name)
                 if verbose:
-                    print '\tcreating new glyph %s...' % glyph_name
+                    print('\tcreating new glyph %s...' % glyph_name)
             # add new template glyph
             elif create_templates:
                 glyph_order.append(glyph_name)
                 if verbose:
-                    print '\tcreating new template glyph %s...' % glyph_name
+                    print('\tcreating new template glyph %s...' % glyph_name)
             # glyph not in font
             else:
                 if verbose:
-                    print '\t%s not in font' % glyph_name
+                    print('\t%s not in font' % glyph_name)
     font.glyphOrder = glyph_order
     font.update()
     if verbose:
-        print '...done.\n'
+        print('...done.\n')
 
 def paint_groups(font, crop=False, order=None):
     '''
@@ -170,16 +171,16 @@ def paint_groups(font, crop=False, order=None):
         _order = []
         if order is not None:
             groups = order
-        elif font.lib.has_key('groups_order'):
+        elif 'groups_order' in font.lib:
             groups = font.lib['groups_order']
         else:
-            groups = font.groups.keys()
+            groups = list(font.groups.keys())
         for group in groups:
             color_step = 1.0 / len(font.groups)
             color = color_step * count
             R, G, B = hls_to_rgb(color, 0.5, 1.0)
             for glyph_name in font.groups[group]:
-                if font.has_key(glyph_name) is not True:
+                if (glyph_name in font) is not True:
                     font.newGlyph(glyph_name)
                 _order.append(glyph_name)
                 font[glyph_name].mark = (R, G, B, 0.3)
@@ -191,7 +192,7 @@ def paint_groups(font, crop=False, order=None):
         if crop:
             crop_glyphset(font, _order)
     else:
-        print 'font has no groups.\n'
+        print('font has no groups.\n')
 
 def crop_glyphset(font, glyph_names):
     '''Reduce the font's character set, keeping only glyphs with names in the given list.'''
@@ -207,7 +208,7 @@ def all_glyphs(groups_dict):
 
     '''
     glyphs = []
-    for group_name in groups_dict.keys():
+    for group_name in list(groups_dict.keys()):
         glyphs += groups_dict[group_name]
     return glyphs
 
@@ -239,10 +240,10 @@ def psname2char(glyph_name):
     Get the unicode character for a given glyph name.
 
     '''
-    if psnames2unicodes.has_key(glyph_name):
+    if glyph_name in psnames2unicodes:
         uni = psnames2unicodes[glyph_name]
 
-    elif unicodes_extra.has_key(glyph_name):
+    elif glyph_name in unicodes_extra:
         uni = unicodes_extra[glyph_name]
 
     elif glyph_name.startswith('uni'):
@@ -253,10 +254,10 @@ def psname2char(glyph_name):
 
     if uni:
         try:
-            char = unichr(uni)
+            char = chr(uni)
         except:
             uni_int = unicode_hexstr_to_int(str(uni))
-            char = unichr(uni_int)
+            char = chr(uni_int)
     else:
         char = None
 
@@ -267,9 +268,9 @@ def psname2unicode(glyph_name):
     Get the unicode value for a given glyph name.
 
     '''
-    if psnames2unicodes.has_key(glyph_name):
+    if glyph_name in psnames2unicodes:
         uni = psnames2unicodes[glyph_name]
-    elif unicodes_extra.has_key(glyph_name):
+    elif glyph_name in unicodes_extra:
         uni = unicodes_extra[glyph_name]
     elif glyph_name.startswith('uni'):
         uni = glyph_name[3:]
@@ -278,7 +279,7 @@ def psname2unicode(glyph_name):
 
     if uni:
         try:
-            char = unichr(uni)
+            char = chr(uni)
             uni = unicode_int_to_hexstr(uni)
         except:
             # uni_int =
@@ -320,21 +321,21 @@ def check_unicode_coverage(font, blocks):
             unicodes[g.unicodes[0]] = g.name
     # check codepoints in font
     blocks_codepoints = OrderedDict()
-    for block in blocks.keys():
+    for block in list(blocks.keys()):
         blocks_codepoints[block] = []
         start_hex, end_hex = blocks[block]
         start_int = unicode_hexstr_to_int(start_hex)
         end_int   = unicode_hexstr_to_int(end_hex)
         # expand codepoints for unicode blocks
         for i in range(start_int, end_int + 1):
-            blocks_codepoints[block].append((i, unicodes.has_key(i)))
+            blocks_codepoints[block].append((i, i in unicodes))
     # done
     return blocks_codepoints
 
 def get_unicode_blocks(font, blocks_codepoints): # complete=True
     # check font support in each block
     blocks_support = OrderedDict()
-    for block in blocks_codepoints.keys():
+    for block in list(blocks_codepoints.keys()):
         supported     = 0
         not_supported = 0
         for codepoint, support in blocks_codepoints[block]:
@@ -345,7 +346,7 @@ def get_unicode_blocks(font, blocks_codepoints): # complete=True
         blocks_support[block] = [supported, not_supported]
     # map unicode blocks to OS2 range numbers
     unicode_blocks = []
-    for block in blocks_support.keys():
+    for block in list(blocks_support.keys()):
         # print block
         # if complete:
         #     if blocks_support[block][0] > 0:

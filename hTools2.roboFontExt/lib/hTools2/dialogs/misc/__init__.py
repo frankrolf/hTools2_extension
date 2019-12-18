@@ -1,9 +1,9 @@
 # import
 
-from select_fonts import SelectFonts
-from checkbox_builder import checkBoxBuilder
-from spinner import Spinner
-from arrows import Arrows
+from .select_fonts import SelectFonts
+from .checkbox_builder import checkBoxBuilder
+from .spinner import Spinner
+from .arrows import Arrows
 
 # export
 

@@ -218,23 +218,23 @@ class setWidthDialog(hDialog):
                     w_mode = None
 
                 # print info
-                print 'setting character widths...\n'
-                print '\t%s %s' % (self._modes[self._mode], width)
-                print '\tmode: %s' % w_mode
-                print
-                print '\t',
+                print('setting character widths...\n')
+                print('\t%s %s' % (self._modes[self._mode], width))
+                print('\tmode: %s' % w_mode)
+                print()
+                print('\t', end=' ')
 
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     self.set_width(f[glyph_name], width, w_mode)
                 f.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
 
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
 
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

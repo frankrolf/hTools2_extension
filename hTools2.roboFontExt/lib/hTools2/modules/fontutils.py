@@ -60,13 +60,13 @@ def print_selected_glyphs(f, mode=0, sort=False):
     # mode 0 : plain glyph names string
     if mode == 0:
         for glyph_name in glyph_names:
-            print glyph_name,
-        print
+            print(glyph_name, end=' ')
+        print()
     # mode 1 : plain glyph names list
     elif mode == 1:
         for glyph_name in glyph_names:
-            print glyph_name
-        print
+            print(glyph_name)
+        print()
     # mode 2 : Python string
     elif mode == 2:
         s = '"'
@@ -74,19 +74,19 @@ def print_selected_glyphs(f, mode=0, sort=False):
             s += '%s ' % glyph_name
         s = s.strip()
         s += '"'
-        print s
-        print
+        print(s)
+        print()
     # mode 3 : Python list
     elif mode == 3:
         s = '['
         for glyph_name in glyph_names:
             s += '"%s", ' % glyph_name
         s += ']'
-        print s
-        print
+        print(s)
+        print()
     # not
     else:
-        print "invalid mode.\n"
+        print("invalid mode.\n")
 
 def parse_glyphs_groups(names, groups):
     """
@@ -98,10 +98,10 @@ def parse_glyphs_groups(names, groups):
         # group names
         if name[0] == '@':
             group_name = name[1:]
-            if groups.has_key(group_name):
+            if group_name in groups:
                 glyph_names += groups[group_name]
             else:
-                print 'project does not have a group called %s.\n' % group_name
+                print('project does not have a group called %s.\n' % group_name)
         # glyph names
         else:
             glyph_names.append(name)
@@ -137,14 +137,14 @@ def rename_glyph(font, old_name, new_name, overwrite=True, mark=True, verbose=Tr
      :param bool verbose: Output informative messages to the console.
 
     """
-    if font.has_key(old_name):
+    if old_name in font:
         g = font[old_name]
         # if new name already exists in font
-        if font.has_key(new_name):
+        if new_name in font:
             # option [1] (default): overwrite
             if overwrite is True:
                 if verbose:
-                    print '\trenaming "%s" to "%s" (overwriting existing glyph)...' % (old_name, new_name)
+                    print('\trenaming "%s" to "%s" (overwriting existing glyph)...' % (old_name, new_name))
                 font.removeGlyph(new_name)
                 g.name = new_name
                 if mark:
@@ -153,33 +153,33 @@ def rename_glyph(font, old_name, new_name, overwrite=True, mark=True, verbose=Tr
             # option [2]: skip, do not overwrite
             else:
                 if verbose:
-                    print '\tskipping "%s", "%s" already exists in font.' % (old_name, new_name)
+                    print('\tskipping "%s", "%s" already exists in font.' % (old_name, new_name))
                 if mark:
                     g.mark = named_colors['red']
                 g.update()
         # if new name not already in font, simply rename glyph
         else:
             if verbose:
-                print '\trenaming "%s" to "%s"...' % (old_name, new_name)
+                print('\trenaming "%s" to "%s"...' % (old_name, new_name))
             g.name = new_name
             if mark:
                 g.mark = named_colors['green']
             g.update()
         # done glyph
     else:
-        if verbose: print '\tskipping "%s", glyph does not exist in font.' % old_name
+        if verbose: print('\tskipping "%s", glyph does not exist in font.' % old_name)
     # done font
     font.update()
 
 def rename_glyphs_from_list(font, names_list, overwrite=True, mark=True, verbose=True):
     if verbose:
-        print 'renaming glyphs...\n'
+        print('renaming glyphs...\n')
     for pair in names_list:
         old_name, new_name = pair
         rename_glyph(font, old_name, new_name, overwrite, mark, verbose)
     if verbose:
-        print
-        print '...done.\n'
+        print()
+        print('...done.\n')
 
 def rename_glyphs_in_font(ufo, names_list, glyphs=True, features=True, components=True):
     if glyphs:
@@ -195,19 +195,19 @@ def rename_glyphs(font, names_list):
 def rename_features(font, names_list):
     features_old = font.features.text.split('\n')
     features_new = ''
-    print 'renaming glyph names in OpenType features...\n'
+    print('renaming glyph names in OpenType features...\n')
     for line in features_old:
         for old_name, new_name in names_list:
             if old_name in line:
-                print '\trenaming "%s" to "%s"...' % (old_name, new_name)
+                print('\trenaming "%s" to "%s"...' % (old_name, new_name))
                 line = line.replace(old_name, new_name)
         features_new += '%s\n' % line
     font.features.text = features_new
-    print
-    print '...done.\n'
+    print()
+    print('...done.\n')
 
 def rename_components(font, names_list, mark=True):
-    for glyph_name in font.keys():
+    for glyph_name in list(font.keys()):
         if len(font[glyph_name].components):
             for component in font[glyph_name].components:
                 for old_name, new_name in names_list:
@@ -219,28 +219,28 @@ def rename_components(font, names_list, mark=True):
 def rename_features_file(fea_path, names_list):
     features_old = open(fea_path, 'r').readlines()
     features_new = []
-    print 'renaming glyph names in features file...\n'
+    print('renaming glyph names in features file...\n')
     for line in features_old:
         for old_name, new_name in names_list:
             if old_name in line:
-                print '\trenaming "%s" to "%s"...' % (old_name, new_name)
+                print('\trenaming "%s" to "%s"...' % (old_name, new_name))
                 line = line.replace(old_name, new_name)
         features_new += line
     fea_txt = ''.join(features_new)
     fea_dest = open(fea_path, 'w')
     fea_dest.write(fea_txt)
     fea_dest.close()
-    print
-    print '...done.\n'
+    print()
+    print('...done.\n')
 
 def rename_encoding(enc_path, names_list):
     enc_src = open(enc_path, 'r').readlines()
     lines = []
-    print 'renaming glyph names in encoding file...\n'
+    print('renaming glyph names in encoding file...\n')
     for line in enc_src:
         for old_name, new_name in names_list:
             if old_name in line:
-                print '\trenaming "%s" to "%s"...' % (old_name, new_name)
+                print('\trenaming "%s" to "%s"...' % (old_name, new_name))
                 line = line.replace(old_name, new_name)
         # check to avoid duplicates
         if not line in lines:
@@ -249,8 +249,8 @@ def rename_encoding(enc_path, names_list):
     enc_dest = open(enc_path, 'w')
     enc_dest.write(enc)
     enc_dest.close()
-    print
-    print '...done.\n'
+    print()
+    print('...done.\n')
 
 #--------
 # groups
@@ -261,7 +261,7 @@ def delete_groups(font):
     Delete all groups in the font.
 
     """
-    for group in font.groups.keys():
+    for group in list(font.groups.keys()):
         del font.groups[group]
     font.update()
 
@@ -273,7 +273,7 @@ def get_spacing_groups(font):
     _groups = {}
     _groups['left'] = {}
     _groups['right'] = {}
-    for _group in font.groups.keys():
+    for _group in list(font.groups.keys()):
         if _group[:1] == '_':
             if _group[1:5] == 'left':
                 _groups['left'][_group] = font.groups[_group]
@@ -291,12 +291,12 @@ def print_groups(font, mode=0):
     # 2 : Python lists
     groups = font.groups
     if len(groups) > 0:
-        print 'printing groups in font %s...' % get_full_name(font)
-        print
+        print('printing groups in font %s...' % get_full_name(font))
+        print()
 
         # 1. print groups as OpenType classes
         if mode == 1:
-            _groups = groups.keys()
+            _groups = list(groups.keys())
             _groups.sort()
             for group in _groups:
               # group names can have spaces, convert to underscore
@@ -308,40 +308,40 @@ def print_groups(font, mode=0):
                   otGlyphs = otGlyphs + " " + gName
               otGlyphs = otGlyphs + " ]"
               # print class in OpenType syntax
-              print "%s = %s;" % (otClassName, otGlyphs)
+              print("%s = %s;" % (otClassName, otGlyphs))
 
         # 2. print groups as Python lists
         elif mode == 2:
             # print groups order (if available)
-            if font.lib.has_key('groups_order'):
-                print font.lib['groups_order']
-                print
+            if 'groups_order' in font.lib:
+                print(font.lib['groups_order'])
+                print()
             # print groups
-            for group in groups.keys():
-                print '%s = %s\n' % (group, font.groups[group])
+            for group in list(groups.keys()):
+                print('%s = %s\n' % (group, font.groups[group]))
 
         # 0. print groups as text
         else:
             # print groups order (if available)
-            if font.lib.has_key('groups_order'):
-                print 'groups order:\n'
+            if 'groups_order' in font.lib:
+                print('groups order:\n')
                 for group_name in font.lib['groups_order']:
-                    print '\t%s' % group_name
-                print
+                    print('\t%s' % group_name)
+                print()
             # print groups
-            print 'groups:\n'
-            for group_name in groups.keys():
-                print '%s:' % group_name
+            print('groups:\n')
+            for group_name in list(groups.keys()):
+                print('%s:' % group_name)
                 for glyph_name in font.groups[group_name]:
-                    print glyph_name,
-                print
-                print
-        print
-        print '...done.\n'
+                    print(glyph_name, end=' ')
+                print()
+                print()
+        print()
+        print('...done.\n')
 
     # font has no groups
     else:
-        print 'font %s has no groups.\n' % font
+        print('font %s has no groups.\n' % font)
 
 def convert_groups_to_classes(src_ufo):
     f = OpenFont(src_ufo, showUI=False)
@@ -355,15 +355,15 @@ def convert_groups_to_classes(src_ufo):
         else:
             right_classes[name] = glyphs
     classes = {}
-    for class_ in right_classes.keys():
-        if class_ in left_classes.keys():
+    for class_ in list(right_classes.keys()):
+        if class_ in list(left_classes.keys()):
             if not right_classes[class_] == left_classes[class_]:
                 class_name = '_%s1' % class_.split('_')[-1]
                 classes[class_name] = right_classes[class_]
         else:
             class_name = '_%s' % class_.split('_')[-1]
             classes[class_name] = right_classes[class_]
-    for class_ in left_classes.keys():
+    for class_ in list(left_classes.keys()):
         class_name = '_%s' % class_.split('_')[-1]
         classes[class_name] = left_classes[class_]
     classes_txt = ''
@@ -475,8 +475,8 @@ def create_guides(font, guides_dict):
 
 def print_guides(font):
     for guide in font.guides:
-        print '%s x:%s y:%s' % (guide.name, guide.x, guide.y)
-    print
+        print('%s x:%s y:%s' % (guide.name, guide.x, guide.y))
+    print()
 
 #--------
 # layers
@@ -542,21 +542,23 @@ def remove_overlap(font):
     for glyph in font:
         glyph.removeOverlap()
 
-def align_to_grid(font, (sizeX, sizeY)):
+def align_to_grid(font, xxx_todo_changeme):
     """
     Align all points of all glyphs in the font to a grid with size ``(sizeX,sizeY)``.
 
     """
+    (sizeX, sizeY) = xxx_todo_changeme
     for glyph in font:
         round_points(glyph, (sizeX, sizeY))
         glyph.update()
     font.update()
 
-def scale_glyphs(f, (factor_x, factor_y)):
+def scale_glyphs(f, xxx_todo_changeme1):
     """
     Scale all glyphs in the font by the given ``(x,y)`` factor.
 
     """
+    (factor_x, factor_y) = xxx_todo_changeme1
     for g in f:
         if len(g.components) == 0:
             leftMargin, rightMargin = g.leftMargin, g.rightMargin
@@ -566,11 +568,12 @@ def scale_glyphs(f, (factor_x, factor_y)):
             g.update()
     f.update()
 
-def move_glyphs(f, (delta_x, delta_y)):
+def move_glyphs(f, xxx_todo_changeme2):
     """
     Move all glyphs in the font by the given ``(x,y)`` distance.
 
     """
+    (delta_x, delta_y) = xxx_todo_changeme2
     for g in f:
         g.move((delta_x, delta_y))
         g.update()
@@ -578,7 +581,7 @@ def move_glyphs(f, (delta_x, delta_y)):
 
 def round_to_grid(font, gridsize, glyphs=None):
     if glyphs is None:
-        glyphs = font.keys()
+        glyphs = list(font.keys())
     for glyph_name in glyphs:
         round_points(font[glyph_name], (gridsize, gridsize))
         round_width(font[glyph_name], gridsize)

@@ -22,7 +22,7 @@ class DesignSpaceMaker(object):
 
     def add_masters(self, verbose=False):
 
-        if verbose: print '\tadding masters...'
+        if verbose: print('\tadding masters...')
 
         for master in self.masters:
             ufo_path = os.path.join(self.project.ufos_folder, '%s.ufo' % master)
@@ -39,7 +39,7 @@ class DesignSpaceMaker(object):
 
                 # add neutral
                 if master == self.neutral:
-                    if verbose: print '\t\tadding %s [neutral]...' % master
+                    if verbose: print('\t\tadding %s [neutral]...' % master)
                     self.doc_writer.addSource(
                         ufo_path, master, location=L,
                         copyInfo=True, copyGroups=True,
@@ -47,12 +47,12 @@ class DesignSpaceMaker(object):
 
                 # add deltas
                 else:
-                    if verbose: print '\t\tadding %s...' % master
+                    if verbose: print('\t\tadding %s...' % master)
                     self.doc_writer.addSource(ufo_path, master, location=L)
 
     def add_instances(self, verbose=False):
 
-        if verbose: print '\tadding instances...'
+        if verbose: print('\tadding instances...')
 
         for instance in self.instances:
             ufo_filename = '%s.ufo' % instance.replace(' ', '-')
@@ -66,7 +66,7 @@ class DesignSpaceMaker(object):
                 L[axis] = param
 
             # add instance
-            if verbose: print '\t\tadding %s...' % instance
+            if verbose: print('\t\tadding %s...' % instance)
             self.doc_writer.startInstance(
                     fileName=ufo_path,
                     familyName='Untitled',
@@ -75,13 +75,13 @@ class DesignSpaceMaker(object):
             self.doc_writer.endInstance()
 
     def save(self, verbose=False):
-        if verbose: print 'creating .designspace file...'
+        if verbose: print('creating .designspace file...')
         # add masters
         self.add_masters(verbose)
         # add instances
         self.add_instances(verbose)
-        if verbose: print '\tsaving file %s...' % self.project.designspace_path,
+        if verbose: print('\tsaving file %s...' % self.project.designspace_path, end=' ')
         # save designspace file
         self.doc_writer.save()
-        if verbose: print os.path.exists(self.project.designspace_path)
-        if verbose: print '...done.\n'
+        if verbose: print(os.path.exists(self.project.designspace_path))
+        if verbose: print('...done.\n')

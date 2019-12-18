@@ -94,17 +94,17 @@ class importUFOIntoLayerDialog(hDialog):
             else:
                 layer_name = os.path.split(self.ufo_path)[1]
             # import layer
-            print 'importing .ufo...\n'
-            print '\ttarget layer: %s\n' % layer_name
+            print('importing .ufo...\n')
+            print('\ttarget layer: %s\n' % layer_name)
             ufo = RFont(self.ufo_path, showUI=False)
-            for glyph_name in f.keys():
-                if ufo.has_key(glyph_name):
+            for glyph_name in list(f.keys()):
+                if glyph_name in ufo:
                     layer_glyph = f[glyph_name].getLayer(layer_name)
                     pen = layer_glyph.getPointPen()
                     ufo[glyph_name].drawPoints(pen)
                     f[glyph_name].update()
             f.update()
-            print '...done.\n'
+            print('...done.\n')
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

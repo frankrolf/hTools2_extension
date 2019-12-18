@@ -19,12 +19,12 @@ def connect_to_server(url, login, password, folder, verbose=False):
     # create FTP connection
     ftp = FTP(url, login, password)
     if verbose == True:
-        print "%s" % ftp.getwelcome()
+        print("%s" % ftp.getwelcome())
     # move to folder
     ftp.cwd(folder)
     if verbose == True:
         ftp.retrlines('LIST')
-        print
+        print()
     return ftp
 
 def upload_file(filePath, FTPconnection):

@@ -132,7 +132,9 @@ class setMarginsDialog(hDialog):
 
     # apply
 
-    def set_margins(self, glyph, (left, left_value, left_mode), (right, right_value, right_mode)):
+    def set_margins(self, glyph, xxx_todo_changeme, xxx_todo_changeme1):
+        (left, left_value, left_mode) = xxx_todo_changeme
+        (right, right_value, right_mode) = xxx_todo_changeme1
         glyph.prepareUndo('set margins')
         # left margin
         if left:
@@ -181,21 +183,21 @@ class setMarginsDialog(hDialog):
             glyph_names = get_glyphs(f)
             if len(glyph_names) > 0:
                 # print info
-                print 'setting margins for selected glyphs...\n'
-                print '\tleft: %s %s [%s]' % (self.modes[left_mode], left_value, boolstring[left])
-                print '\tright: %s %s [%s]' % (self.modes[right_mode], right_value, boolstring[right])
-                print
-                print '\t',
+                print('setting margins for selected glyphs...\n')
+                print('\tleft: %s %s [%s]' % (self.modes[left_mode], left_value, boolstring[left]))
+                print('\tright: %s %s [%s]' % (self.modes[right_mode], right_value, boolstring[right]))
+                print()
+                print('\t', end=' ')
                 # set margins
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     self.set_margins(f[glyph_name], (left, left_value, left_mode), (right, right_value, right_mode))
                 f.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

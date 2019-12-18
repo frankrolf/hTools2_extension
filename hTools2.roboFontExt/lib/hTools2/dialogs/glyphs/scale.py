@@ -128,23 +128,24 @@ class scaleGlyphsDialog(hDialog):
         value = float(self.w.spinner.value.get())
         self.scale_glyphs((value, value))
 
-    def scale_glyphs(self, (factor_x, factor_y)):
+    def scale_glyphs(self, xxx_todo_changeme):
+        (factor_x, factor_y) = xxx_todo_changeme
         boolstring = [ False, True ]
         font = CurrentFont()
         if font is not None:
             glyph_names = get_glyphs(font)
             # scale glyphs
             if len(glyph_names) > 0:
-                print 'scaling selected glyphs...\n'
-                print '\tx factor: %s' % factor_x
-                print '\ty factor: %s' % factor_y
-                print
-                print '\tside-bearings: %s' % boolstring[self.x_metrics]
-                print '\tvertical metrics: %s' % boolstring[self.y_metrics]
-                print
-                print '\t',
+                print('scaling selected glyphs...\n')
+                print('\tx factor: %s' % factor_x)
+                print('\ty factor: %s' % factor_y)
+                print()
+                print('\tside-bearings: %s' % boolstring[self.x_metrics])
+                print('\tvertical metrics: %s' % boolstring[self.y_metrics])
+                print()
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     glyph = font[glyph_name]
                     glyph.prepareUndo('scale')
                     left = glyph.leftMargin
@@ -171,11 +172,11 @@ class scaleGlyphsDialog(hDialog):
                     font.info.ascender = font.info.ascender * factor_y
                     font.info.descender = font.info.descender * factor_y
                 # done all glyphs
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

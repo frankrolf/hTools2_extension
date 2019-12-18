@@ -1,7 +1,8 @@
 # [h] diacritics coverage dialog
 
 import hTools2.modules.languages
-reload(hTools2.modules.languages)
+import importlib
+importlib.reload(hTools2.modules.languages)
 
 # imports
 
@@ -17,7 +18,7 @@ class diacriticsCoverageDialog(hDialog):
 
     list_height = 180
 
-    languages_order = diacritics_glyphnames.keys()
+    languages_order = list(diacritics_glyphnames.keys())
     languages_order.sort()
     languages_selected = []
 
@@ -117,7 +118,7 @@ class diacriticsCoverageDialog(hDialog):
     def select_all_callback(self, sender):
         # print dir(List)
         if sender.get():
-            self.w.languages.setSelection( range( len(self.w.languages)-1 ) )
+            self.w.languages.setSelection( list(range( len(self.w.languages)-1)) )
         else:
             self.w.languages.setSelection([])
 
@@ -150,20 +151,20 @@ class diacriticsCoverageDialog(hDialog):
     def print_callback(self, sender):
         chars, glyph_names = self.build_glyphs()
         # print info
-        print 'accented characters for languages'
-        print '=' * self.n
-        print
-        print 'languages:'
-        print '-' * self.n
-        print '%s\n' % ' '.join(self.languages_selected)
+        print('accented characters for languages')
+        print('=' * self.n)
+        print()
+        print('languages:')
+        print('-' * self.n)
+        print('%s\n' % ' '.join(self.languages_selected))
         # print characters
-        print 'characters:'
-        print '-' * self.n
-        print '%s\n' % ' '.join(chars)
+        print('characters:')
+        print('-' * self.n)
+        print('%s\n' % ' '.join(chars))
         # print glyph names
-        print 'glyph names:'
-        print '-' * self.n
-        print '%s\n' % ' '.join(glyph_names)
+        print('glyph names:')
+        print('-' * self.n)
+        print('%s\n' % ' '.join(glyph_names))
 
     def make_callback(self, sender):
         f = CurrentFont()
@@ -172,23 +173,23 @@ class diacriticsCoverageDialog(hDialog):
             # compare with existing glyphs
             new_glyph_names = []
             for glyph_name in glyph_names:
-                if not f.has_key(glyph_name):
+                if glyph_name not in f:
                     new_glyph_names.append(glyph_name)
             # create new glyphs
             if len(new_glyph_names) > 0:
-                print 'making glyphs...\n'
-                print '\t',
+                print('making glyphs...\n')
+                print('\t', end=' ')
                 for glyph_name in new_glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     f.newGlyph(glyph_name)
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no new glyph to create
             else:
-                print 'no new glyph to create.'
+                print('no new glyph to create.')
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def check_callback(self, sender):
         mode = self.w.check_mode.get()
@@ -198,18 +199,18 @@ class diacriticsCoverageDialog(hDialog):
         else:
             f = CurrentFont()
             if f is not None:
-                glyph_names = f.keys()
+                glyph_names = list(f.keys())
                 glyph_names.sort()
             else:                
-                print no_font_open
+                print(no_font_open)
                 return
         # print info
         if mode:
-            print 'language support in accented characters'
+            print('language support in accented characters')
         else:
-            print 'language support in current font'
-        print '=' * self.n
-        print
+            print('language support in current font')
+        print('=' * self.n)
+        print()
         check_languages_coverage(glyph_names, self.n)
 
 # run!

@@ -25,7 +25,7 @@ class svgImporter:
         _commandName = ""
         _commandNumbers = []
         for x in svgSource.split():
-            if x in self.svgSyntax.keys():
+            if x in list(self.svgSyntax.keys()):
                 if _counter == 0:
                     _commandName = str(x)
                 else:

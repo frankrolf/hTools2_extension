@@ -18,11 +18,12 @@ def rect(pen, x, y, w, h):
     pen.lineTo( (x+w, y) )
     pen.closePath()
 
-def ellipse(pen, (x, y, rx, ry)):
+def ellipse(pen, xxx_todo_changeme):
     """
     Draw an ellipse with a pen object.
 
     """
+    (x, y, rx, ry) = xxx_todo_changeme
     bcpx = BEZIER_ARC_CIRCLE * rx
     bcpy = BEZIER_ARC_CIRCLE * ry
     pen.moveTo( (x, y + rx) )

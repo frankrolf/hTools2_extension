@@ -125,7 +125,7 @@ class condenseGlyphsDialog(hDialog):
         self.w.open()
 
     def update_callback(self, sender):
-        print 'updating fonts'
+        print('updating fonts')
         self.get_fonts()
         self.w._f1_font.setItems(sorted(self.all_fonts.keys()))
         self.w._f2_font.setItems(sorted(self.all_fonts.keys()))
@@ -142,14 +142,14 @@ class condenseGlyphsDialog(hDialog):
         # get factors
         factor = float(self.w.spinner.value.get())
         # print info
-        print 'condensing glyphs...\n'
-        print '\tmaster 1: %s' % get_full_name(f1)
-        print '\tmaster 2: %s' % get_full_name(f2)
-        print '\ttarget: %s' % get_full_name(f3)
-        print
-        print '\tfactor: %s' % factor
-        print
-        print '\t',
+        print('condensing glyphs...\n')
+        print('\tmaster 1: %s' % get_full_name(f1))
+        print('\tmaster 2: %s' % get_full_name(f2))
+        print('\ttarget: %s' % get_full_name(f3))
+        print()
+        print('\tfactor: %s' % factor)
+        print()
+        print('\t', end=' ')
         self.w.bar.start()
         # get stems
         f1_stems = f1.info.postscriptStemSnapH
@@ -160,11 +160,11 @@ class condenseGlyphsDialog(hDialog):
         if len(f1_stems) > 0 and len(f2_stems) > 0:
             condense_glyphs(f3, f1, f2, f1_stems[0], f2_stems[0], factor, glyph_names)
         else:
-            print 'One or both fonts have no PS stem widths.'
+            print('One or both fonts have no PS stem widths.')
         # done
         self.w.bar.stop()
-        print
-        print '\n...done.\n'
+        print()
+        print('\n...done.\n')
 
     def get_fonts(self):
         self.all_fonts = {}

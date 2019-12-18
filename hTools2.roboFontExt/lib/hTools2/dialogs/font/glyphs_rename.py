@@ -80,7 +80,7 @@ class batchRenameGlyphs(hDialog):
         _mark = self.w._mark.get()
         # the apply button was pressed before getting the list file
         if not self.list_path:
-            print 'please get a names list first.\n'
+            print('please get a names list first.\n')
             return
         f = CurrentFont()
         if f is not None:
@@ -89,7 +89,7 @@ class batchRenameGlyphs(hDialog):
                 rename_glyphs_from_list(f, names_list, overwrite=_overwrite, mark=_mark)
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

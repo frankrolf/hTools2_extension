@@ -3,7 +3,8 @@
 """basic functions to import, export and delete OpenType features in fonts"""
 
 import hTools2.modules.sysutils
-reload(hTools2.modules.sysutils)
+import importlib
+importlib.reload(hTools2.modules.sysutils)
 
 import os
 from hTools2.modules.sysutils import rel_path
@@ -71,7 +72,7 @@ def export_kern_feature(font):
     kern_feature = 'feature kern {\n'
     for pair in sorted(font.kerning.keys()):
         value = font.kerning[pair]
-        if pair[0] in font.keys() and pair[1] in font.keys():
+        if pair[0] in list(font.keys()) and pair[1] in list(font.keys()):
             kern_feature += '\tpos %s %s %s;\n' % (pair[0], pair[1], value)
     kern_feature += '} kern;\n'
     return kern_feature

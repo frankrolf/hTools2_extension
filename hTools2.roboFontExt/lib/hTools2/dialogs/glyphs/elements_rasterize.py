@@ -1,7 +1,8 @@
 # [h] rasterize selected glyphs into elements
 
 import hTools2.modules.rasterizer
-reload(hTools2.modules.rasterizer)
+import importlib
+importlib.reload(hTools2.modules.rasterizer)
 
 # imports
 
@@ -95,20 +96,20 @@ class rasterizeGlyphDialog(hDialog):
                 # get resolution
                 gridsize = int(self.w.spinner.value.get())
                 res = (gridsize, gridsize)
-                print "scanning glyphs...\n"
+                print("scanning glyphs...\n")
                 for glyph_name in glyph_names:
                     glyph = font[glyph_name]
                     R = RasterGlyph(glyph)
                     R.scan(res=res)
                 # done
                 font.update()
-                print "...done.\n"
+                print("...done.\n")
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def _print_callback(self, sender):
         font = CurrentFont()
@@ -120,19 +121,19 @@ class rasterizeGlyphDialog(hDialog):
                 gridsize = int(self.w.spinner.value.get())
                 res = (gridsize, gridsize)
                 # print bit libs
-                print "printing glyphs...\n"
+                print("printing glyphs...\n")
                 for glyph_name in glyph_names:
                     glyph = font[glyph_name]
                     R = RasterGlyph(glyph)
                     R.print_bits(res=res)
                 # done
-                print "...done.\n"
+                print("...done.\n")
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def _rasterize_callback(self, sender):
         font = CurrentFont()
@@ -142,10 +143,10 @@ class rasterizeGlyphDialog(hDialog):
                 gridsize = int(self.w.spinner.value.get())
                 res = (gridsize, gridsize)
                 self.w.bar.start()
-                print "rasterizing glyphs...\n"
+                print("rasterizing glyphs...\n")
                 for glyph_name in glyph_names:
                     glyph = font[glyph_name]
-                    print '\tscanning %s...' % glyph_name
+                    print('\tscanning %s...' % glyph_name)
                     glyph.prepareUndo('rasterize glyph')
                     R = RasterGlyph(glyph)
                     R.rasterize(res=res)
@@ -154,10 +155,10 @@ class rasterizeGlyphDialog(hDialog):
                 # done
                 font.update()
                 self.w.bar.stop()
-                print "\n...done.\n"
+                print("\n...done.\n")
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

@@ -211,19 +211,20 @@ class moveAnchorsDialog(hDialog):
         # save names
         self.anchor_names = anchor_names
 
-    def move_anchors(self, (x, y)):
+    def move_anchors(self, xxx_todo_changeme):
+        (x, y) = xxx_todo_changeme
         f = CurrentFont()
         if f is not None:
             glyph_names = get_glyphs(f)
             if len(glyph_names) > 0:
                 self.get_parameters()
-                print 'moving anchors in glyphs...\n'
-                print '\tanchors: %s' % self.anchor_names
-                print '\tmove: %s, %s' % (x, y)
-                print
-                print '\t',
+                print('moving anchors in glyphs...\n')
+                print('\tanchors: %s' % self.anchor_names)
+                print('\tmove: %s, %s' % (x, y))
+                print()
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     if self.anchors_layers:
                         for layer_name in f.layerOrder:
                             layer_glyph = f[glyph_name].getLayer(layer_name)
@@ -239,11 +240,11 @@ class moveAnchorsDialog(hDialog):
                     # done glyph
                     f[glyph_name].update()
                 f.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

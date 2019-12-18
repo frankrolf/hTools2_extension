@@ -1,10 +1,11 @@
 # [h] glyph outliner
 
 import hTools2.modules.outline
-reload(hTools2.modules.outline)
+import importlib
+importlib.reload(hTools2.modules.outline)
 
 import hTools2.dialogs.misc
-reload(hTools2.dialogs.misc)
+importlib.reload(hTools2.dialogs.misc)
 
 # imports
 
@@ -115,22 +116,22 @@ class outlineGlyphsDialog(hDialog):
                 join = self.w.join.get()
                 cap = self.w.cap.get()
                 # print info
-                print 'applying stroke to skeletons...\n'
-                print '\tdelta: %s' % delta
-                print '\tjoin style: %s' % self.stroke_parameters[join]
-                print '\tcap style: %s' % self.stroke_parameters[cap]
-                print
-                print '\t',
+                print('applying stroke to skeletons...\n')
+                print('\tdelta: %s' % delta)
+                print('\tjoin style: %s' % self.stroke_parameters[join])
+                print('\tcap style: %s' % self.stroke_parameters[cap])
+                print()
+                print('\t', end=' ')
                 # apply outline
                 for glyph_name in glyph_names:
                     src_glyph = dst_glyph = font[glyph_name]
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     expand(src_glyph, dst_glyph, delta, join, cap)
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

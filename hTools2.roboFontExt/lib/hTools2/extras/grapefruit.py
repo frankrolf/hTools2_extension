@@ -17,9 +17,10 @@
 
 '''GrapeFruit - Color manipulation in Python'''
 
-from __future__ import division
+
 
 import sys
+import importlib
 
 # $Id$
 __author__ = 'Xavier Basty <xbasty@gmail.com>'
@@ -338,7 +339,7 @@ class Color:
         The RGBA representation of this grapefruit.Color instance.
 
       '''
-      return unicode('%g, %g, %g, %g)') % (self.__rgb + (self.__a,))
+      return str('%g, %g, %g, %g)') % (self.__rgb + (self.__a,))
 
   def __iter__(self):
     return iter(self.__rgb + (self.__a,))
@@ -2034,7 +2035,7 @@ class Color:
 
 def _test():
   import doctest
-  reload(doctest)
+  importlib.reload(doctest)
   doctest.testmod()
 
 if __name__=='__main__':

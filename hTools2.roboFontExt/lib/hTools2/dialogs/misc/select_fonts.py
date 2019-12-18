@@ -174,15 +174,15 @@ class SelectFonts(object):
                 if font not in self._fonts:
                     self._fonts.append(font)
                     if self._verbose:
-                        print 'font %s added to list' % font
+                        print('font %s added to list' % font)
                 # font already in list
                 else:
                     if self._verbose:
-                        print 'font %s already in list' % font
+                        print('font %s already in list' % font)
         # no fonts to add
         else:
             if self._verbose:
-                print 'no font in folder.'
+                print('no font in folder.')
         # update font list
         self._update_list()
 
@@ -206,22 +206,22 @@ class SelectFonts(object):
             if _value:
                 if self._current_font not in self._fonts:
                     if self._verbose:
-                        print 'added current font to list'
+                        print('added current font to list')
                     self._fonts.append(self._current_font)
                 # current font already in list
                 else:
                     if self._verbose:
-                        print 'font already in list'
+                        print('font already in list')
             # remove current font from list
             else:
                 if self._current_font in self._fonts:
                     self._fonts.remove(self._current_font)
                 if self._verbose:
-                    print 'removed current font from the list'
+                    print('removed current font from the list')
         # no current font
         else:
             if self._verbose:
-                print 'no CurrentFont available.\n'
+                print('no CurrentFont available.\n')
         # update font list
         self._update_list()
 
@@ -234,11 +234,11 @@ class SelectFonts(object):
                 if font not in self._fonts:
                     self._fonts.append(font)
                     if self._verbose:
-                        print 'font %s added to list' % font
+                        print('font %s added to list' % font)
                 # font already in list
                 else:
                     if self._verbose:
-                        print 'font %s already in list' % font
+                        print('font %s already in list' % font)
         # remove fonts from list
         else:
             for font in self._open_fonts:
@@ -247,14 +247,14 @@ class SelectFonts(object):
                     if font != self._current_font:
                         self._fonts.remove(font)
                         if self._verbose:
-                            print 'font %s removed from list' % font
+                            print('font %s removed from list' % font)
                     else:
                         if self._verbose:
-                            print 'font %s is the current font' % font
+                            print('font %s is the current font' % font)
                 # font not in list
                 else:
                     if self._verbose:
-                        print 'font %s not in list' % font
+                        print('font %s not in list' % font)
         # update font list
         self._update_list()
 
@@ -266,18 +266,18 @@ class SelectFonts(object):
             # get folder
             if self._folder is None:
                 if self._verbose:
-                    print 'getting folder'
+                    print('getting folder')
                 self._get_folder()
             # get fonts in folder
             if self._folder is not None:
                 if self._verbose:
-                    print 'getting fonts in folder'
+                    print('getting fonts in folder')
                 self._get_folder_fonts()
             # no folder selected
             else:
                 self.w._fonts_folder_checkbox.set(False)
                 if self._verbose:
-                    print 'no folder selected.'
+                    print('no folder selected.')
             # add folder fonts to list
             self._add_folder_fonts()
         # remove folder fonts from list
@@ -287,7 +287,7 @@ class SelectFonts(object):
                     if font != self._current_font:
                         self._fonts.remove(font)
                         if self._verbose:
-                            print 'font %s removed from list' % font
+                            print('font %s removed from list' % font)
             # update font list
             self._update_list()
 
@@ -295,7 +295,7 @@ class SelectFonts(object):
         """triggered every time the `get folder` button is clicked"""
         # get folder
         if self._verbose:
-            print 'getting fonts from folder...'
+            print('getting fonts from folder...')
         self._get_folder()
         # get fonts from folder
         if self._folder is not None:
@@ -306,11 +306,11 @@ class SelectFonts(object):
             # no font in folder
             else:
                 if self._verbose:
-                    print 'there are no font files in the selected folder.'
+                    print('there are no font files in the selected folder.')
         # no folder selected
         else:
             if self._verbose:
-                print 'no folder selected.'
+                print('no folder selected.')
 
     def _update_list(self):
         list_1 = [ ]
@@ -336,6 +336,6 @@ class SelectFonts(object):
 
     def cancel_callback(self, sender):
         if self._verbose:
-            print 'dialog cancelled.'
+            print('dialog cancelled.')
         yield None
 

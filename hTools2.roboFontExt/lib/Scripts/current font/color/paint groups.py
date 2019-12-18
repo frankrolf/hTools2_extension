@@ -9,4 +9,4 @@ if f is not None:
     paint_groups(f)
 
 else:
-    print no_font_open
+    print(no_font_open)

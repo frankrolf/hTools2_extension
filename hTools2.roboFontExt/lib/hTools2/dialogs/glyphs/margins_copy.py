@@ -118,10 +118,10 @@ class copyMarginsDialog(hDialog):
     def apply_callback(self, sender):
         # no font open
         if len(self.all_fonts) == 0:
-            print no_font_open
+            print(no_font_open)
         # only one font open
         elif len(self.all_fonts) == 1:
-            print no_other_fonts
+            print(no_other_fonts)
         # two or more fonts open
         else:
             boolstring = [False, True]
@@ -139,19 +139,19 @@ class copyMarginsDialog(hDialog):
             # batch process glyphs
             if _left or _right:
                 # print info
-                print 'copying side-bearings...\n'
-                print '\tsource font: %s' % _source_font_name
-                print '\ttarget font: %s' % _dest_font_name
-                print
-                print '\tcopy left: %s' % boolstring[_left]
-                print '\tcopy right: %s' % boolstring[_right]
-                print
+                print('copying side-bearings...\n')
+                print('\tsource font: %s' % _source_font_name)
+                print('\ttarget font: %s' % _dest_font_name)
+                print()
+                print('\tcopy left: %s' % boolstring[_left])
+                print('\tcopy right: %s' % boolstring[_right])
+                print()
                 # batch copy side-bearings
                 for glyph_name in get_glyphs(_source_font):
                     try:
                         # set undo
                         _dest_font[glyph_name].prepareUndo('copy margins')
-                        print '\t%s' % glyph_name,
+                        print('\t%s' % glyph_name, end=' ')
                         # copy
                         if _left:
                             _dest_font[glyph_name].leftMargin = _source_font[glyph_name].leftMargin
@@ -161,12 +161,12 @@ class copyMarginsDialog(hDialog):
                         _dest_font.performUndo()
                         _dest_font.update()
                     except:
-                        print '\tcannot process %s' % glyph_name
-                print
-                print '\n...done.\n'
+                        print('\tcannot process %s' % glyph_name)
+                print()
+                print('\n...done.\n')
             # nothing selected
             else:
-                print 'Nothing to copy. Please select "left" or "right" side-bearings, and try again.\n'
+                print('Nothing to copy. Please select "left" or "right" side-bearings, and try again.\n')
 
     def on_close_window(self, sender):
         removeObserver(self, "newFontDidOpen")

@@ -61,7 +61,7 @@ def generate_webfont(otf_path, strip_names=False, woff=True, woff_path=None, wof
 
     # clear temporary otf file
     if clear_otf_tmp and strip_names:
-        print otf_path
+        print(otf_path)
         # os.remove(otf_path_tmp)
 
 def subset_font(src_path, dst_path, enc_path, remove_features=True, remove_kerning=False, remove_hinting=False, strip_names=False, verbose=False):
@@ -226,7 +226,7 @@ def generate_svg(src_path, svg_path):
         extractUFO(src_path, font)
         convertUFOToSVGFont(font, svg_path)
     except:
-        print "Failed to generate SVG."
+        print("Failed to generate SVG.")
 
 #--------------
 # base64 tools

@@ -101,10 +101,10 @@ class copyPasteGlyphDialog(hDialog):
     def copy_callback(self, sender):
         f = CurrentFont()
         glyph_name = get_glyphs(f)[0]
-        print 'copied glyph %s' % glyph_name
+        print('copied glyph %s' % glyph_name)
         self.source_font = f
         self.source_glyph = self.source_font[glyph_name]
-        print
+        print()
 
     def paste_callback(self, sender):
         f = CurrentFont()
@@ -119,17 +119,17 @@ class copyPasteGlyphDialog(hDialog):
                 color = self.w.color.get()
                 # print info
                 bool_string = [ False, True ]
-                print 'pasting data from glyph %s:\n' % self.source_glyph.name
-                print '\tforeground: %s' % bool_string[foreground]
-                print '\tlayers: %s' % bool_string[layers]
-                print '\tmetrics: %s' % bool_string[metrics]
-                print '\tanchors: %s' % bool_string[anchors]
-                print '\tcolor: %s' % bool_string[color]
-                print
-                print '\tpasting in',
+                print('pasting data from glyph %s:\n' % self.source_glyph.name)
+                print('\tforeground: %s' % bool_string[foreground])
+                print('\tlayers: %s' % bool_string[layers])
+                print('\tmetrics: %s' % bool_string[metrics])
+                print('\tanchors: %s' % bool_string[anchors])
+                print('\tcolor: %s' % bool_string[color])
+                print()
+                print('\tpasting in', end=' ')
                 # copy data
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     # prepare undo
                     f[glyph_name].prepareUndo('paste from glyph')
                     # copy outlines in foreground layer
@@ -159,11 +159,11 @@ class copyPasteGlyphDialog(hDialog):
                     f[glyph_name].update()
                 # done
                 f.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

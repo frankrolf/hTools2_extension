@@ -1,7 +1,8 @@
 # [h] interpolate glyphs
 
 import hTools2.dialogs.misc
-reload(hTools2.dialogs.misc)
+import importlib
+importlib.reload(hTools2.dialogs.misc)
 
 # imports
 
@@ -180,24 +181,24 @@ class interpolateGlyphsDialog(hDialog):
                 x = float(self.w._factor_x.value.get())
                 y = float(self.w._factor_y.value.get())
                 # print info
-                print 'interpolating glyphs...\n'
+                print('interpolating glyphs...\n')
                 boolstring = (False, True)
-                print '\tmaster 1: %s' % f1_name
-                print '\tmaster 2: %s' % f2_name
-                print '\ttarget: %s'   % f3_name
-                print
-                print '\tfactor x: %s' % x
-                print '\tfactor y: %s' % y
-                print '\tproportional: %s' % boolstring[self.proportional]
-                print
-                print '\t',
+                print('\tmaster 1: %s' % f1_name)
+                print('\tmaster 2: %s' % f2_name)
+                print('\ttarget: %s'   % f3_name)
+                print()
+                print('\tfactor x: %s' % x)
+                print('\tfactor y: %s' % y)
+                print('\tproportional: %s' % boolstring[self.proportional])
+                print()
+                print('\t', end=' ')
                 self.w.bar.start()
                 # interpolate glyphs
                 for glyph_name in glyph_names:
                     # check glyphs
-                    if f2.has_key(glyph_name):
+                    if glyph_name in f2:
                         f3.newGlyph(glyph_name, clear=True)
-                        print glyph_name,
+                        print(glyph_name, end=' ')
                         # get glyphs
                         g1 = f1[glyph_name]
                         g2 = f2[glyph_name]
@@ -209,20 +210,20 @@ class interpolateGlyphsDialog(hDialog):
                         g3.update()
                         g3.performUndo()
                     else:
-                        print '\tfont 2 does not have glyph %s' % glyph_name
+                        print('\tfont 2 does not have glyph %s' % glyph_name)
                 # done
                 # if len(glyph_names):
                 #     f3.update()
                 self.w.bar.stop()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
 
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def on_close_window(self, sender):
         removeObserver(self, "newFontDidOpen")

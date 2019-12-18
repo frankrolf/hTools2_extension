@@ -10,7 +10,7 @@ def get_vstems(font, glyphs=['l', 'I']):
     ref_y = font.info.xHeight / 2.0
     stems = []
     for glyph_name in glyphs:
-        if font.has_key(glyph_name):
+        if glyph_name in font:
             g = font[glyph_name]
             # get margins
             pen = MarginPen(g, ref_y, isHorizontal=True)
@@ -27,7 +27,7 @@ def get_vstems(font, glyphs=['l', 'I']):
 def get_hstems(font, glyphs=['H']):
     stems = []
     for glyph_name in glyphs:
-        if font.has_key(glyph_name):
+        if glyph_name in font:
             g = font[glyph_name]
             ref_x = g.width / 2.0
             # get margins

@@ -4,8 +4,8 @@
 
 # import
 
-from actions import actionsDialog
-from generate import generateAllFontsDialog
+from .actions import actionsDialog
+from .generate import generateAllFontsDialog
 
 # export
 

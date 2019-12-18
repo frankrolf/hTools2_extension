@@ -84,7 +84,8 @@ class checkBoxBuilder(object):
         # open window
         self.w.open()
 
-    def _add_checkbox(self, (title, value)):
+    def _add_checkbox(self, xxx_todo_changeme):
+        (title, value) = xxx_todo_changeme
         number = len(self._checkboxes) + 2
         attribute_name = "checkBox%d" % number
         x = self._padding
@@ -102,13 +103,13 @@ class checkBoxBuilder(object):
     def _select_all_callback(self, sender):
         self._select_all = sender.get()
         # update internal values
-        for _checkbox in self._checkboxes.keys():
+        for _checkbox in list(self._checkboxes.keys()):
             title, value = self._checkboxes[_checkbox]
             self._checkboxes[_checkbox] = (title, self._select_all)
         # update dialog
         for _checkbox in dir(self.w):
             if _checkbox[:8] == 'checkBox':
-                exec "self.w.%s.set(%s)" % (_checkbox, self._select_all)
+                exec("self.w.%s.set(%s)" % (_checkbox, self._select_all))
 
     def checkbox_callback(self, sender):
         title, value = self._checkboxes[sender]
@@ -116,7 +117,7 @@ class checkBoxBuilder(object):
         self._checkboxes[sender] = (title, value)
 
     def ok_callback(self, sender):
-        _checkboxes = self._checkboxes.keys()
+        _checkboxes = list(self._checkboxes.keys())
         _checkboxes.sort()
         for _checkbox in _checkboxes:
             title, value = self._checkboxes[_checkbox]

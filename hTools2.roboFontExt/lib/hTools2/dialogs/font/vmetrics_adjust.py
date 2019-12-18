@@ -291,7 +291,7 @@ class adjustVerticalMetrics(hDialog):
             # open window
             self.w.open()
         else:
-            print no_font_open
+            print(no_font_open)
 
     # updates
 

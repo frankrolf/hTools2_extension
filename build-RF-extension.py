@@ -1,7 +1,8 @@
 # [h] build hTools2 as a RoboFont Extension
 
 import hTools2
-reload(hTools2)
+import importlib
+importlib.reload(hTools2)
 
 import os
 from mojo.extensions import ExtensionBundle
@@ -12,7 +13,7 @@ hTools2_html = os.path.join(os.path.dirname(hTools2_path), "Docs/build/html")
 extension_file = 'hTools2.roboFontExt'
 extension_path = os.path.join(os.path.dirname(__file__), extension_file)
 
-print 'building extension...',
+print('building extension...', end=' ')
 
 B = ExtensionBundle()
 B.name = "hTools2"
@@ -29,4 +30,4 @@ B.infoDictionary["summary"] = 'A collection of tools to help with common type de
 B.infoDictionary["html"] = 1
 B.save(extension_path, libPath=hTools2_path, htmlPath=hTools2_html, resourcesPath=None, pycOnly=False)
 
-print 'done.'
+print('done.')

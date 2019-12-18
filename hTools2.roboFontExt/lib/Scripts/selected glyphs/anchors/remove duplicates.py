@@ -12,19 +12,19 @@ if f is not None:
 
     if len(glyph_names) > 0:
 
-        print 'cleaning duplicate anchors...\n'
+        print('cleaning duplicate anchors...\n')
 
         for glyph_name in glyph_names:
             g = f[glyph_name]
-            print '\t%s: %s ->' % (glyph_name, len(g.anchors)),
+            print('\t%s: %s ->' % (glyph_name, len(g.anchors)), end=' ')
             clear_duplicate_anchors(g)
-            print len(g.anchors)
+            print(len(g.anchors))
 
-        print
-        print '...done.\n'
+        print()
+        print('...done.\n')
 
     else:
-        print no_glyph_selected
+        print(no_glyph_selected)
 
 else:
-    print no_font_open
+    print(no_font_open)

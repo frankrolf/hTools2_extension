@@ -25,7 +25,7 @@ def random_color(alpha=1.0):
 
 def clear_colors(font):
     """Clear the color from all glyph cells in the font."""
-    for glyph_name in font.keys():
+    for glyph_name in list(font.keys()):
         clear_color(font[glyph_name])
     font.update()
 
@@ -106,8 +106,9 @@ def ryb_to_rgb(r, y, b):
     # done
     return (red, green, blue)
 
-def RGB_to_nodebox_color((R, G, B), ctx, alpha=1.0):
+def RGB_to_nodebox_color(xxx_todo_changeme, ctx, alpha=1.0):
     """Convert RGB color to a NodeBox ``Color`` object."""
+    (R, G, B) = xxx_todo_changeme
     colors = ctx.ximport("colors")
     _alpha = 255 * alpha
     _color = colors.rgb(R, G, B, _alpha, range=255)
@@ -136,17 +137,17 @@ named_colors = {
 def solarized_color(name):
     """Return an ``RGB`` color for a solarized color name."""
     # name is color group
-    if name in solarized_groups.keys():
+    if name in list(solarized_groups.keys()):
         _colors = []
         for _color in solarized_groups[name]:
             _colors.append(solarized_colors[_color])
         return _colors
     # name is color
-    elif name in solarized_colors.keys():
+    elif name in list(solarized_colors.keys()):
         return solarized_colors[name]
     # name has no meaning
     else:
-        print 'name %s is not a solarized group or color.\n' % name
+        print('name %s is not a solarized group or color.\n' % name)
 
 # Solarized colors by name and RGB values.
 solarized_colors = {
@@ -187,7 +188,7 @@ solarized_groups = {
 def x11_color(name):
     """Return an ``RGB`` color for an x11 color name."""
     # name is color
-    _color_names = x11_colors.keys()
+    _color_names = list(x11_colors.keys())
     if name in _color_names:
         return x11_colors[name]
     else:
@@ -196,12 +197,12 @@ def x11_color(name):
         for color_name in _color_names:
             _color_names_lower[color_name.lower()] = color_name
         # try name in lowercase
-        if name in _color_names_lower.keys():
+        if name in list(_color_names_lower.keys()):
             color_name = _color_names_lower[name]
             return x11_colors[color_name]
         # name is not x11 color
         else:
-            print 'name %s is not a x11 group or color.\n' % name
+            print('name %s is not a x11 group or color.\n' % name)
 
 # X11 colors by name and `(R,G,B)` values.
 x11_colors = {

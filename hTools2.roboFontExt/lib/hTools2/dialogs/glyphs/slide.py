@@ -145,7 +145,7 @@ class slideGlyphsDialog(hDialog):
             self.restore_x()
             self.restore_y()
         else:
-            print no_font_open
+            print(no_font_open)
 
     def set_defaults(self):
         self._xMax = self.font.info.unitsPerEm
@@ -169,6 +169,6 @@ class slideGlyphsDialog(hDialog):
                 try:
                     self.font[glyph_name].move((-x, -y))
                 except:
-                    print 'cannot transform %s' % glyph_name
+                    print('cannot transform %s' % glyph_name)
         else:
-            print no_glyph_selected
+            print(no_glyph_selected)

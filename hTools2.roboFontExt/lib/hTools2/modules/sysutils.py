@@ -4,7 +4,7 @@ import os
 
 # objects
 
-import sys, StringIO
+import sys, io
 
 class SuppressPrint(object):
 
@@ -15,7 +15,7 @@ class SuppressPrint(object):
 
     def __enter__(self):
         self.stdout = sys.stdout
-        sys.stdout = StringIO.StringIO()
+        sys.stdout = io.StringIO()
 
     def __exit__(self, *args):
         sys.stdout = self.stdout
@@ -27,7 +27,7 @@ def clean_pyc(directory, path):
     for file_name in directory:
         file_path = os.path.join(path, file_name)
         if file_name[-3:] == 'pyc':
-            print 'deleting %s' % file_name
+            print('deleting %s' % file_name)
             os.remove(file_path)
         elif os.path.isdir(file_path):
             clean_pyc(os.listdir(file_path), file_path)
@@ -109,15 +109,15 @@ if _ctx == 'RoboFont':
         _dict = getScriptingMenuNamingShortKey()
         for k in _dict:
             name, key = _dict[k]
-            print _dict[k][key], _dict[k][name],
-            if verbose: print k, os.path.exists(k),
-            print
-        print
+            print(_dict[k][key], _dict[k][name], end=' ')
+            if verbose: print(k, os.path.exists(k), end=' ')
+            print()
+        print()
 
     def set_shortcuts(shortcuts_dict):
         """Set RoboFont shortcuts from a dictionary."""
         # setScriptingMenuNamingShortKey(shortcuts_dict)
-        for path in shortcuts_dict.keys():
+        for path in list(shortcuts_dict.keys()):
             preferredName = shortcuts_dict[path]['preferredName']
             shortKey = shortcuts_dict[path]['shortKey']
             modifier = shortcuts_dict[path]['modifier']
@@ -161,14 +161,14 @@ def build_shortcuts_dict(path, shortcuts):
             _shortcuts_dict[_file_path]['shortKey'] = _key
             _shortcuts_dict[_file_path]['modifier'] = createModifier(command=True, shift=True)
         else:
-            print '%s does not exist.' % _file_path
+            print('%s does not exist.' % _file_path)
     return _shortcuts_dict
 
 def merge_shortcuts_dicts(dicts_list):
     """Merge all shortcut dictionaries in a given list."""
     _super_dict = {}
     for _dict in dicts_list:
-        for k in _dict.keys():
+        for k in list(_dict.keys()):
             _super_dict[k] = _dict[k]
     return _super_dict
 

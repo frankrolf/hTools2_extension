@@ -16,7 +16,7 @@ def get_anchors(font, glyph_names=None):
     '''
     anchors_dict = {}
     if glyph_names == None:
-        _glyph_names = font.keys()
+        _glyph_names = list(font.keys())
     else:
         _glyph_names = glyph_names
     for glyph_name in _glyph_names:
@@ -35,9 +35,9 @@ def clear_anchors(font, glyph_names=None):
 
     '''
     if glyph_names is None:
-        glyph_names = font.keys()
+        glyph_names = list(font.keys())
     for glyph_name in glyph_names:
-        if font.has_key(glyph_name) and len(font[glyph_name].anchors) > 0:
+        if glyph_name in font and len(font[glyph_name].anchors) > 0:
             font[glyph_name].prepareUndo('clear anchors')
             font[glyph_name].clearAnchors()
             font[glyph_name].update()
@@ -70,11 +70,11 @@ def get_anchors_dict(accents_dict):
     '''
     # get anchors
     anchors_dict = {}
-    for accented_glyph in accents_dict.keys():
+    for accented_glyph in list(accents_dict.keys()):
         # get base glyph and accents
         base, accents = accents_dict[accented_glyph]
         # create entry
-        if not anchors_dict.has_key(base):
+        if base not in anchors_dict:
             anchors_dict[base] = []
         # add anchor to lib
         for accent in accents:
@@ -87,11 +87,11 @@ def get_anchors_dict(accents_dict):
 def get_accents_anchors_dict(accents_dict):
     # get anchors
     anchors_dict = {}
-    for accented_glyph in accents_dict.keys():
+    for accented_glyph in list(accents_dict.keys()):
         # get base glyph and accents
         base, accents = accents_dict[accented_glyph]
         for accent_name, accent_anchor in accents:
-            if not anchors_dict.has_key(accent_name):
+            if accent_name not in anchors_dict:
                 anchors_dict[accent_name] = []
             if accent_anchor not in anchors_dict[accent_name]:
                 anchors_dict[accent_name].append(accent_anchor)
@@ -148,7 +148,7 @@ def transfer_anchors(source_glyph, dest_glyph, clear=True, proportional=False):
     # done
     return has_anchor
 
-def move_anchors(glyph, anchor_names, (delta_x, delta_y)):
+def move_anchors(glyph, anchor_names, xxx_todo_changeme):
     '''Move named anchors in the given glyph.
 
     **anchor_names** A list of anchor names to move.
@@ -156,6 +156,7 @@ def move_anchors(glyph, anchor_names, (delta_x, delta_y)):
     **delta_y** The vertical move distance.
 
     '''
+    (delta_x, delta_y) = xxx_todo_changeme
     for anchor in glyph.anchors:
         if anchor.name in anchor_names:
             anchor.move((delta_x, delta_y))

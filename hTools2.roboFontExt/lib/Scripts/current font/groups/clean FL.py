@@ -11,7 +11,7 @@ from hTools2.modules.messages import no_font_open
 
 def clean_FL_groups(font):
     """remove quotes from names of master glyphs in FL spacing classes"""
-    for group_name in f.groups.keys():
+    for group_name in list(f.groups.keys()):
         glyph_names = []
         for glyph_name in f.groups[group_name]:
             if glyph_name.count("'") > 0:

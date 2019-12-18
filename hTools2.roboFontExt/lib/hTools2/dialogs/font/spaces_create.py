@@ -161,7 +161,7 @@ class createSpaceGlyphsDialog(hDialog):
             self.w.thickspace_value.set('')
             self.w.thinspace_value.set('')
             self.w.figurespace_value.set('')
-            print no_font_open
+            print(no_font_open)
 
     def apply_callback(self, sender):
         hairspace = int(self.w.hairspace_value.get())
@@ -171,43 +171,43 @@ class createSpaceGlyphsDialog(hDialog):
         # boolstring = (False, True)
         if self.font is not None:
             # print info
-            print 'creating space glyphs...\n'
-            print '\thair space: %s units' % hairspace
-            print '\tthin space: %s units' % thinspace
-            print '\tthick space: %s units' % thickspace
-            print '\tfigure space: %s units' % figurespace
-            print '\tzero-width space: 0'
+            print('creating space glyphs...\n')
+            print('\thair space: %s units' % hairspace)
+            print('\tthin space: %s units' % thinspace)
+            print('\tthick space: %s units' % thickspace)
+            print('\tfigure space: %s units' % figurespace)
+            print('\tzero-width space: 0')
             # hair space
             self.font.newGlyph('hairspace')
             self.font['hairspace'].width = hairspace
-            self.font['hairspace'].unicode = unicode_hexstr_to_int('uni200A')
+            self.font['hairspace'].str = unicode_hexstr_to_int('uni200A')
             self.font['hairspace'].update()
             # thin space
             self.font.newGlyph('thinspace')
             self.font['thinspace'].width = thinspace
-            self.font['thinspace'].unicode = unicode_hexstr_to_int('uni2009')
+            self.font['thinspace'].str = unicode_hexstr_to_int('uni2009')
             self.font['thinspace'].update()
             # thick space
             self.font.newGlyph('thickspace')
             self.font['thickspace'].width = thickspace
-            self.font['thickspace'].unicode = unicode_hexstr_to_int('uni2004')
+            self.font['thickspace'].str = unicode_hexstr_to_int('uni2004')
             self.font['thickspace'].update()
             # figure space
             self.font.newGlyph('figurespace')
             self.font['figurespace'].width = figurespace
-            self.font['figurespace'].unicode = unicode_hexstr_to_int('uni2007')
+            self.font['figurespace'].str = unicode_hexstr_to_int('uni2007')
             self.font['figurespace'].update()
             # zero-width space
             self.font.newGlyph('zerowidthspace')
             self.font['zerowidthspace'].width = 0
-            self.font['zerowidthspace'].unicode = unicode_hexstr_to_int('uni200B')
+            self.font['zerowidthspace'].str = unicode_hexstr_to_int('uni200B')
             self.font['zerowidthspace'].update()
             # done
             self.font.update()
-            print
-            print '...done.\n'
+            print()
+            print('...done.\n')
         else:
-            print no_font_open
+            print(no_font_open)
 
     def update_callback(self, sender):
         self.get_font()

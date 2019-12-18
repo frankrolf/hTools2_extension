@@ -108,10 +108,10 @@ class copyWidthsDialog(hDialog):
     def apply_callback(self, sender):
         # no font open
         if len(self.all_fonts) == 0:
-            print no_font_open
+            print(no_font_open)
         # only one font open
         elif len(self.all_fonts) == 1:
-            print no_other_fonts
+            print(no_other_fonts)
         # two or more fonts open
         else:
             boolstring = [False, True]
@@ -126,19 +126,19 @@ class copyWidthsDialog(hDialog):
             # center
             _center = self.w.center_checkbox.get()
             # print info
-            print 'copying widths...\n'
-            print '\tsource font: %s' % _source_font_name
-            print '\ttarget font: %s' % _dest_font_name
-            print '\tcenter: %s' % boolstring[_center]
-            print
-            print '\t',
+            print('copying widths...\n')
+            print('\tsource font: %s' % _source_font_name)
+            print('\ttarget font: %s' % _dest_font_name)
+            print('\tcenter: %s' % boolstring[_center])
+            print()
+            print('\t', end=' ')
             # batch copy side-bearings
             for glyph_name in get_glyphs(_source_font):
-                if _dest_font.has_key(glyph_name):
+                if glyph_name in _dest_font:
                      # set undo
                     _dest_font[glyph_name].prepareUndo('copy width')
                     # copy
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     _dest_font[glyph_name].width = _source_font[glyph_name].width
                     # center
                     if _center:
@@ -147,8 +147,8 @@ class copyWidthsDialog(hDialog):
                     _dest_font[glyph_name].performUndo()
                     _dest_font[glyph_name].update()
             _dest_font.update()
-            print
-            print '\n...done.\n'
+            print()
+            print('\n...done.\n')
 
     def on_close_window(self, sender):
         # remove observers on close window

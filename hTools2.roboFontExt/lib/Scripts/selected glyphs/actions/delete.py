@@ -22,7 +22,7 @@ if f is not None:
         f.update()
 
     else:
-        print no_glyph_selected
+        print(no_glyph_selected)
 
 else:
-    print no_font_open
+    print(no_font_open)

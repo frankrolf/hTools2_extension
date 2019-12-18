@@ -69,7 +69,7 @@ class printGlyphsDialog(hDialog):
                 print_selected_glyphs(font, mode, sort=sort_names)
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

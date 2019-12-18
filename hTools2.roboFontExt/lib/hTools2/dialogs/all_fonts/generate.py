@@ -105,9 +105,9 @@ class generateAllFontsDialog(hDialog):
         folder_otfs = getFolder()
         if folder_otfs is not None:
             self._otfs_folder = folder_otfs[0]
-            print 'otfs folder: %s' % self._otfs_folder
+            print('otfs folder: %s' % self._otfs_folder)
         else:
-            print 'no folder selected.\n'
+            print('no folder selected.\n')
 
     def test_install_callback(self, sender):
         all_fonts = AllFonts()
@@ -125,33 +125,33 @@ class generateAllFontsDialog(hDialog):
             _release_mode = self.w._release_mode.get()
             # print settings
             boolstring = ("False", "True")
-            print 'generating .otfs for all open fonts...\n'
-            print '\totfs folder: %s' % self._otfs_folder
-            print '\tremove overlaps: %s' % boolstring[_overlaps]
-            print '\tdecompose: %s' % boolstring[_decompose]
-            print '\tautohint: %s' % boolstring[_autohint]
-            print '\trelease mode: %s' % boolstring[_release_mode]
-            print
+            print('generating .otfs for all open fonts...\n')
+            print('\totfs folder: %s' % self._otfs_folder)
+            print('\tremove overlaps: %s' % boolstring[_overlaps])
+            print('\tdecompose: %s' % boolstring[_decompose])
+            print('\tautohint: %s' % boolstring[_autohint])
+            print('\trelease mode: %s' % boolstring[_release_mode])
+            print()
             # batch generate
             self.w.bar.start()
             _undo_name = 'generate all open fonts'
             for font in all_fonts:
                 if font.path is not None:
                     _font_path = font.path
-                    print '\tgenerating .otf for %s...' % os.path.split(get_full_name(font))[1]
+                    print('\tgenerating .otf for %s...' % os.path.split(get_full_name(font))[1])
                     # generate otf
                     otf_file = os.path.splitext(os.path.split(font.path)[1])[0] + '.otf'
                     otf_path = os.path.join(self._otfs_folder, otf_file)
                     font.generate(otf_path, 'otf', decompose=_decompose, autohint=_autohint,
                                 checkOutlines=_overlaps, releaseMode=_release_mode, glyphOrder=[])
-                    print '\t\totf path: %s' % otf_path
-                    print '\t\tgeneration sucessful? %s\n' % os.path.exists(otf_path)
+                    print('\t\totf path: %s' % otf_path)
+                    print('\t\tgeneration sucessful? %s\n' % os.path.exists(otf_path))
                 # skip unsaved open fonts
                 else:
-                    print '\tskipping "%s", please save this font to file first.\n' % os.path.split(get_full_name(font))[1]
+                    print('\tskipping "%s", please save this font to file first.\n' % os.path.split(get_full_name(font))[1])
             # done all
             self.w.bar.stop()
-            print '...done.\n'
+            print('...done.\n')
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

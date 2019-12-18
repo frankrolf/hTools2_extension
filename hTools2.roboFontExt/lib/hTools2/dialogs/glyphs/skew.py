@@ -44,14 +44,14 @@ class skewGlyphsDialog(hDialog):
                     (x, y,
                     self.square_button,
                     self.square_button),
-                    unichr(8672),
+                    chr(8672),
                     callback=self._skew_minus_callback)
         x += (self.square_button - 1)
         self.w._skew_x_plus_button = SquareButton(
                     (x, y,
                     self.square_button,
                     self.square_button),
-                    unichr(8674),
+                    chr(8674),
                     callback=self._skew_plus_callback)
         # scale factor
         x = 0
@@ -84,13 +84,13 @@ class skewGlyphsDialog(hDialog):
     def _skew_minus_callback(self, sender):
         value = float(self.w.spinner.value.get())
         if self.verbose:
-            print 'skew -%s' % value
+            print('skew -%s' % value)
         self.skew_glyphs(-value)
 
     def _skew_plus_callback(self, sender):
         value = float(self.w.spinner.value.get())
         if self.verbose:
-            print 'skew +%s' % value
+            print('skew +%s' % value)
         self.skew_glyphs(value)
 
     def skew_glyphs(self, angle):
@@ -108,7 +108,7 @@ class skewGlyphsDialog(hDialog):
                     font[glyph_name].performUndo()
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

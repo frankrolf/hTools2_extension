@@ -58,13 +58,13 @@ class switchGlyphDialog(hDialog):
                         (x1, y,
                         self.square_button,
                         self.square_button),
-                        unichr(8673),
+                        chr(8673),
                         callback=self._up_callback)
             self.w._up_right = SquareButton(
                         (x2 + 8, y,
                         self.square_button - 8,
                         self.square_button - 8),
-                        unichr(8599),
+                        chr(8599),
                         callback=self._up_right_callback,
                         sizeStyle=self.size_style)
             y += self.square_button - 1
@@ -72,27 +72,27 @@ class switchGlyphDialog(hDialog):
                         (x, y,
                         self.square_button,
                         self.square_button),
-                        unichr(8672),
+                        chr(8672),
                         callback=self._left_callback)
             self.w._right = SquareButton(
                         (x2, y,
                         self.square_button,
                         self.square_button),
-                        unichr(8674),
+                        chr(8674),
                         callback=self._right_callback)
             y += self.square_button - 1
             self.w._down_left = SquareButton(
                         (x, y + 8,
                         self.square_button - 8,
                         self.square_button - 8),
-                        unichr(8601),
+                        chr(8601),
                         callback=self._down_left_callback,
                         sizeStyle=self.size_style)
             self.w._down = SquareButton(
                         (x1, y,
                         self.square_button,
                         self.square_button),
-                        unichr(8675),
+                        chr(8675),
                         callback=self._down_callback)
             # location
             y = self.padding_y
@@ -141,7 +141,7 @@ class switchGlyphDialog(hDialog):
                 # open window
                 self.w.open()
         else:
-            print no_font_open
+            print(no_font_open)
 
     # methods
 
@@ -209,10 +209,10 @@ class switchGlyphDialog(hDialog):
                     self._update_text_box()
                     return True
                 else:
-                    print no_glyph_selected
+                    print(no_glyph_selected)
                     return False
             else:
-                print no_font_open
+                print(no_font_open)
                 return False
 
     # callbacks
@@ -243,7 +243,7 @@ class switchGlyphDialog(hDialog):
             # get glyph
             g_current = CurrentGlyph()
             if g_current is not None:
-                if next_font.has_key(g_current.name):
+                if g_current.name in next_font:
                     next_glyph = next_font[g_current.name]
                 else:
                     next_glyph = next_font[next_font.glyphOrder[0]]
@@ -266,7 +266,7 @@ class switchGlyphDialog(hDialog):
             # get glyph
             g_current = CurrentGlyph()
             if g_current is not None:
-                if prev_font.has_key(g_current.name):
+                if g_current.name in prev_font:
                     prev_glyph = prev_font[g_current.name]
                 else:
                     prev_glyph = prev_font[prev_font.glyphOrder[0]]

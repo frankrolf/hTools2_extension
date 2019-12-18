@@ -89,16 +89,16 @@ class transferVMetricsDialog(hDialog):
             self.w.target_value.setItems(self.all_fonts_names)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def apply_callback(self, sender):
         # get parameters
         source_font = self.all_fonts[self.w.source_value.get()]
         target_font = self.all_fonts[self.w.target_value.get()]
         # print info
-        print 'copying vmetrics...\n'
-        print '\tsource font: %s' % get_full_name(source_font)
-        print '\ttarget font: %s' % get_full_name(target_font)
+        print('copying vmetrics...\n')
+        print('\tsource font: %s' % get_full_name(source_font))
+        print('\ttarget font: %s' % get_full_name(target_font))
         # copy vmetrics
         target_font.info.xHeight = source_font.info.xHeight
         target_font.info.capHeight = source_font.info.capHeight
@@ -106,9 +106,9 @@ class transferVMetricsDialog(hDialog):
         target_font.info.descender = source_font.info.descender
         target_font.info.unitsPerEm = source_font.info.unitsPerEm
         # done
-        print
+        print()
         target_font.update()
-        print '...done.\n'
+        print('...done.\n')
 
     def on_close_window(self, sender):
         removeObserver(self, "fontDidOpen")

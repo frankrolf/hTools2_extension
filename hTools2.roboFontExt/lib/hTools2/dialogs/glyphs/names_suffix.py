@@ -110,11 +110,11 @@ class changeSuffixDialog(hDialog):
                 self.new_suffix = self.w.new_suffix_value.get()
                 self.overwrite = self.w.overwrite_checkbox.get()
                 # print info
-                print 'changing glyph name suffixes...\n'
-                print '\told suffix: %s' % (self.old_suffix)
-                print '\tnew suffix: %s' % (self.new_suffix)
-                print '\toverwrite: %s' % boolstring[self.overwrite]
-                print
+                print('changing glyph name suffixes...\n')
+                print('\told suffix: %s' % (self.old_suffix))
+                print('\tnew suffix: %s' % (self.new_suffix))
+                print('\toverwrite: %s' % boolstring[self.overwrite])
+                print()
                 # batch change glyph names
                 for glyph_name in glyph_names:
                     g = f[glyph_name]
@@ -133,33 +133,33 @@ class changeSuffixDialog(hDialog):
                             new_name = glyph_name
                         # new name not in font (rename)
                         if new_name != glyph_name:
-                            if not f.has_key(new_name):
-                                print '\trenaming %s to %s...' % (glyph_name, new_name)
+                            if new_name not in f:
+                                print('\trenaming %s to %s...' % (glyph_name, new_name))
                                 g.name = new_name
                             # new name in font
                             else:
                                 # overwrite
                                 if self._overwrite:
-                                    print "\toverwriting '%s' with '%s'" % (new_name, glyph_name)
+                                    print("\toverwriting '%s' with '%s'" % (new_name, glyph_name))
                                     f.removeGlyph(_new_name)
                                     f.update()
                                     g.name = new_name
                                     g.update()
                                 # do not overwrite
                                 else:
-                                    print "\t'%s' already exists in font, skipping '%s'" % (new_name, glyph_name)
+                                    print("\t'%s' already exists in font, skipping '%s'" % (new_name, glyph_name))
                     # glyph does not have suffix
                     else:
                         pass
                     # done glyph
                 # done font
                 f.update()
-                print
-                print '...done.\n'
+                print()
+                print('...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
         pass

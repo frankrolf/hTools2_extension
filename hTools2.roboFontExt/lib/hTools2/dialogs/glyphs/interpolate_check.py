@@ -94,7 +94,7 @@ class checkGlyphsCompatibilityDialog(hDialog):
                 self.all_fonts_names.append(get_full_name(font))
 
     def update_callback(self, sender):
-        print 'updating fonts'
+        print('updating fonts')
         self.get_fonts()
         self.w.f1_font.setItems(self.all_fonts_names)
         self.w.f2_font.setItems(self.all_fonts_names)
@@ -108,7 +108,7 @@ class checkGlyphsCompatibilityDialog(hDialog):
         # get glyphs
         glyph_names = get_glyphs(f1)
         if len(glyph_names) == 0:
-            glyph_names = f1.keys()
+            glyph_names = list(f1.keys())
         # run!
         check_compatibility(f2, f1, names=glyph_names, report=False)
 

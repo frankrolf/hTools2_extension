@@ -4,10 +4,10 @@
 
 # import
 
-from actions import actionsFolderDialog
-from ufo2otf import UFOsToOTFsDialog
-from otf2ufo import OTFsToUFOsDialog
-from woff2ufo import WOFFsToUFOsDialog
+from .actions import actionsFolderDialog
+from .ufo2otf import UFOsToOTFsDialog
+from .otf2ufo import OTFsToUFOsDialog
+from .woff2ufo import WOFFsToUFOsDialog
 
 # export
 

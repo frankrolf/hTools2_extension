@@ -190,38 +190,38 @@ class actionsFolderDialog(hDialog):
     def apply_callback(self, sender):
         ufo_paths = walk(self.ufos_folder, 'ufo')
         if len(ufo_paths) > 0:
-            print 'transforming all fonts in folder...\n'
+            print('transforming all fonts in folder...\n')
             self.w.bar.start()
             for ufo_path in ufo_paths:
                 font = RFont(ufo_path, showUI=False)
-                print '\ttransforming %s...' % get_full_name(font)
+                print('\ttransforming %s...' % get_full_name(font))
                 if self.round:
-                    print '\t\trounding points...'
+                    print('\t\trounding points...')
                     font.round()
                 if self.decompose:
-                    print '\t\tdecomposing...'
+                    print('\t\tdecomposing...')
                     decompose(font)
                 if self.overlaps:
-                    print '\t\tremoving overlaps...'
+                    print('\t\tremoving overlaps...')
                     font.removeOverlap()
                 if self.order:
-                    print '\t\tauto contour order...'
+                    print('\t\tauto contour order...')
                     auto_contour_order(font)
                 if self.direction:
-                    print '\t\tauto contour direction...'
+                    print('\t\tauto contour direction...')
                     auto_contour_direction(font)
                 if self.extremes:
-                    print '\t\tadding extreme points...'
+                    print('\t\tadding extreme points...')
                     add_extremes(font)
                 if self.remove_features:
-                    print '\t\tremoving all OpenType features...'
+                    print('\t\tremoving all OpenType features...')
                     clear_features(font)
                 if self.save:
-                    print '\t\tsaving font...'
+                    print('\t\tsaving font...')
                     font.save()
-                print '\t...done.\n'
+                print('\t...done.\n')
             self.w.bar.stop()
-            print '...done.\n'
+            print('...done.\n')
         # no font in folder
         else:
-            print no_font_in_folder
+            print(no_font_in_folder)

@@ -143,18 +143,18 @@ class shiftPointsDialog(hDialog):
                 if self.axis == 0: _sides = [ 'right', 'left' ]
                 else: _sides = [ 'top', 'bottom' ]
                 # print info
-                print 'shifting points in glyphs...\n'
-                print '\tposition: %s' % self.pos
-                print '\tdelta: %s' % _delta
-                print '\taxis: %s' % _axes[self.axis]
-                print '\tmode: %s' % _modes[mode]
-                print '\tside: %s' % _sides[self.side]
-                print '\tlayers: %s' % _boolstring[self.layers]
-                print
-                print '\t',
+                print('shifting points in glyphs...\n')
+                print('\tposition: %s' % self.pos)
+                print('\tdelta: %s' % _delta)
+                print('\taxis: %s' % _axes[self.axis])
+                print('\tmode: %s' % _modes[mode])
+                print('\tside: %s' % _sides[self.side])
+                print('\tlayers: %s' % _boolstring[self.layers])
+                print()
+                print('\t', end=' ')
                 # transform
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     # get glyph
                     g = self.font[glyph_name]
                     # shift y
@@ -200,12 +200,12 @@ class shiftPointsDialog(hDialog):
                     # done glyph
                 # done
                 self.font.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 

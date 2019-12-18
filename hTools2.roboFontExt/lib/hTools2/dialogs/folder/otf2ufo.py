@@ -93,26 +93,26 @@ class OTFsToUFOsDialog(hDialog):
                     self.ufos_folder = self.otfs_folder
                 # print settings
                 boolstring = ["False", "True"]
-                print 'batch generating ufos for all otfs in folder...\n'
-                print '\totfs folder: %s' % self.otfs_folder
-                print '\tufos folder: %s' % self.ufos_folder
-                print
+                print('batch generating ufos for all otfs in folder...\n')
+                print('\totfs folder: %s' % self.otfs_folder)
+                print('\tufos folder: %s' % self.ufos_folder)
+                print()
                 # batch convert
                 self.w.bar.start()
                 for otf_path in _otfs_paths:
-                    print '\tcreating ufo from %s...' % os.path.split(otf_path)[1]
+                    print('\tcreating ufo from %s...' % os.path.split(otf_path)[1])
                     otf = OpenFont(otf_path, showUI=True) # does not work without UI
                     ufo_file = os.path.splitext(os.path.split(otf_path)[1])[0] + '.ufo'
                     ufo_path = os.path.join(self.ufos_folder, ufo_file)
                     otf.save(ufo_path)
                     # close
                     otf.close()
-                    print '\t\tufo path: %s' % ufo_path
-                    print '\t\tconversion sucessful? %s\n' % os.path.exists(ufo_path)
+                    print('\t\tufo path: %s' % ufo_path)
+                    print('\t\tconversion sucessful? %s\n' % os.path.exists(ufo_path))
                 # done
                 self.w.bar.stop()
-                print
-                print '...done.\n'
+                print()
+                print('...done.\n')
         # no font in folder
         else:
-            print no_font_in_folder
+            print(no_font_in_folder)

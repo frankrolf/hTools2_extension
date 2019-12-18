@@ -104,16 +104,16 @@ class alignLayersDialog(hDialog):
             glyph_names = get_glyphs(self.font)
             if len(glyph_names) > 0:
                 guides = self.w.guides.get()
-                print 'centering glyphs...\n'
-                print '\t',
+                print('centering glyphs...\n')
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     center_glyph_layers(self.font[glyph_name], self.layer_names, guides)
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

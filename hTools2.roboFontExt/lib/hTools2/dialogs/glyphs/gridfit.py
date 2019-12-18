@@ -160,7 +160,7 @@ class roundToGridDialog(hDialog):
         if self.font is not None:
             glyph_names = get_glyphs(self.font)
             if len(glyph_names) > 0:
-                print 'gridfitting glyphs...\n'
+                print('gridfitting glyphs...\n')
                 # get options
                 options = {
                     'bpoints' : self.w._b_points_checkBox.get(),
@@ -173,25 +173,25 @@ class roundToGridDialog(hDialog):
                 }
                 # print info
                 boolstring = [ False, True ]
-                print '\tgrid size: %s' % options['gridsize']
-                print '\tbPoints: %s' % boolstring[options['bpoints']]
-                print '\tpoints: %s' % boolstring[options['points']]
-                print '\tmargins: %s' % boolstring[options['margins']]
-                print '\twidth: %s' % boolstring[options['width']]
-                print '\tanchors: %s' % boolstring[options['anchors']]
-                print '\tlayers: %s' % boolstring[options['layers']]
-                print
-                print '\t',
+                print('\tgrid size: %s' % options['gridsize'])
+                print('\tbPoints: %s' % boolstring[options['bpoints']])
+                print('\tpoints: %s' % boolstring[options['points']])
+                print('\tmargins: %s' % boolstring[options['margins']])
+                print('\twidth: %s' % boolstring[options['width']])
+                print('\tanchors: %s' % boolstring[options['anchors']])
+                print('\tlayers: %s' % boolstring[options['layers']])
+                print()
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     self.gridfit(self.font[glyph_name], options)
                 # done
                 self.font.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

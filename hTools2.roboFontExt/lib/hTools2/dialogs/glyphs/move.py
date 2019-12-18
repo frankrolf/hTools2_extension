@@ -115,7 +115,8 @@ class moveGlyphsDialog(hDialog):
 
     # apply transformation
 
-    def move_glyphs(self, (x, y)):
+    def move_glyphs(self, xxx_todo_changeme):
+        (x, y) = xxx_todo_changeme
         f = CurrentFont()
         if f is not None:
             glyph_names = get_glyphs(f)
@@ -128,16 +129,16 @@ class moveGlyphsDialog(hDialog):
                     boolstring = [ False, True ]
                     # print info
                     if self.verbose:
-                        print 'moving selected glyphs...\n'
-                        print '\tx: %s' % x
-                        print '\ty: %s' % y
-                        print '\tlayers: %s' % boolstring[layers]
-                        print
-                        print '\t',
+                        print('moving selected glyphs...\n')
+                        print('\tx: %s' % x)
+                        print('\ty: %s' % y)
+                        print('\tlayers: %s' % boolstring[layers])
+                        print()
+                        print('\t', end=' ')
                     # move glyphs
                     for glyph_name in glyph_names:
                         if self.verbose:
-                            print glyph_name,
+                            print(glyph_name, end=' ')
                         f[glyph_name].prepareUndo('move')
                         # all layers
                         if layers:
@@ -153,14 +154,14 @@ class moveGlyphsDialog(hDialog):
                     # done font
                     f.update()
                     if self.verbose:
-                        print
-                        print '\n...done.\n'
+                        print()
+                        print('\n...done.\n')
                 # no layer selected
                 else:
-                    print no_layer_selected
+                    print(no_layer_selected)
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

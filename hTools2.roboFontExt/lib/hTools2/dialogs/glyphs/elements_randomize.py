@@ -3,10 +3,11 @@
 # debug
 
 import hTools2.modules.rasterizer
-reload(hTools2.modules.rasterizer)
+import importlib
+importlib.reload(hTools2.modules.rasterizer)
 
 import hTools2.dialogs.misc
-reload(hTools2.dialogs.misc)
+importlib.reload(hTools2.dialogs.misc)
 
 # imports
 
@@ -96,7 +97,7 @@ class randomizeElementsDialog(hDialog):
                 font.update()
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

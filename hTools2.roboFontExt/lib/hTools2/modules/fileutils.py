@@ -108,28 +108,28 @@ def rename_file(filepath, new_name, overwrite=True, delete=True):
     _new_file_name = new_name + _ext
     _new_path = os.path.join(_dir, _new_file_name)
 
-    print 'renaming file...'
+    print('renaming file...')
 
     # folder
     if os.path.isdir(filepath):
         if os.path.exists(_new_path):
             if overwrite:
                 shutil.rmtree(_new_path)
-        print '\tsaving %s as %s...' % (filepath, _new_path)
+        print('\tsaving %s as %s...' % (filepath, _new_path))
         shutil.copytree(filepath, _new_path)
         if delete:
-            print '\tdeleting %s...' % filepath
+            print('\tdeleting %s...' % filepath)
             shutil.rmtree(filepath)
 
     # file
     else:
-        print '\tsaving %s as %s...' % (filepath, _new_path)
+        print('\tsaving %s as %s...' % (filepath, _new_path))
         shutil.copy(filepath, _new_path)
         if delete:
-            print '\tdeleting %s...' % filepath
+            print('\tdeleting %s...' % filepath)
             os.remove(filepath)
 
-    print '...done.\n'
+    print('...done.\n')
 
 # def prepend_zeros(number, length):
 #     """Add padding with zeros before number for sorting."""
@@ -158,6 +158,6 @@ def copy_files(source_path, dest_path, verbose=False):
                     # copy file
                     if not os.path.isfile(new_loc):
                         if verbose:
-                            print 'copying file from %s to %s.' % (old_loc, new_loc)
+                            print('copying file from %s to %s.' % (old_loc, new_loc))
                         shutil.copy2(old_loc, new_loc)
 

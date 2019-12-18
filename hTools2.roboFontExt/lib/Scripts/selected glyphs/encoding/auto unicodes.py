@@ -3,7 +3,8 @@
 """Automatically set unicode values for selected glyphs."""
 
 import hTools2.modules.encoding
-reload(hTools2.modules.encoding)
+import importlib
+importlib.reload(hTools2.modules.encoding)
 
 # imports
 
@@ -23,17 +24,17 @@ f = CurrentFont()
 if f is not None:
     glyph_names = get_glyphs(f)
     if len(glyph_names) > 0:
-        print 'setting unicode for selected glyphs...\n'
-        print '\t',
+        print('setting unicode for selected glyphs...\n')
+        print('\t', end=' ')
         for glyph_name in glyph_names:
-            print glyph_name,
+            print(glyph_name, end=' ')
             auto_unicode(f[glyph_name])
-        print
-        print '\n...done.\n'
+        print()
+        print('\n...done.\n')
     # no glyph selected
     else:
-        print no_glyph_selected
+        print(no_glyph_selected)
 
 # no font open
 else:
-    print no_font_open
+    print(no_font_open)

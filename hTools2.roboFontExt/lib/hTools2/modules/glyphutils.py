@@ -78,11 +78,12 @@ def change_suffix(glyph, old_suffix, new_suffix=None):
 # round to grid
 #---------------
 
-def round_points(glyph, (sizeX, sizeY)):
+def round_points(glyph, xxx_todo_changeme):
     """
     Round the position of all ``points`` in ``glyph`` to the gridsize ``(sizeX,sizeY)``.
 
     """
+    (sizeX, sizeY) = xxx_todo_changeme
     for contour in glyph.contours:
         for point in contour.points:
             _x = float(point.x)
@@ -93,11 +94,12 @@ def round_points(glyph, (sizeX, sizeY)):
             point.y = _y_round
     glyph.update()
 
-def round_bpoints(glyph, (sizeX, sizeY)):
+def round_bpoints(glyph, xxx_todo_changeme1):
     """
     Round the position of all ``bPoints`` in ``glyph`` to the gridsize ``(sizeX,sizeY)``.
 
     """
+    (sizeX, sizeY) = xxx_todo_changeme1
     for contour in glyph.contours:
         for b_point in contour.bPoints:
             _x = float(b_point.anchor[0])
@@ -107,11 +109,12 @@ def round_bpoints(glyph, (sizeX, sizeY)):
             b_point.anchor = (_x_round, _y_round)
     glyph.update()
 
-def round_anchors(glyph, (sizeX, sizeY)):
+def round_anchors(glyph, xxx_todo_changeme2):
     """
     Round the position of all ``anchors`` in ``glyph`` to the gridsize ``(sizeX,sizeY)``.
 
     """
+    (sizeX, sizeY) = xxx_todo_changeme2
     if len(glyph.anchors) > 0:
         for anchor in glyph.anchors:
             _x_round = round(float(anchor.x) / sizeX)
@@ -265,8 +268,10 @@ def shift_selected_points_y(glyph, delta, anchors=False, bPoints=True):
 # center glyphs
 #---------------
 
-def draw_bounds(g, (x1, y1, x2, y2), (x3, y3)):
+def draw_bounds(g, xxx_todo_changeme3, xxx_todo_changeme4):
     # x guides
+    (x1, y1, x2, y2) = xxx_todo_changeme3
+    (x3, y3) = xxx_todo_changeme4
     g.addGuide((x1, 0), 90, name="x_min")
     g.addGuide((x2, 0), 90, name="x_max")
     g.addGuide((x3, 0), 90, name="x_mid")
@@ -313,14 +318,16 @@ def get_bounds(g, layer_names):
     # done
     return (lowest_x, lowest_y, highest_x, highest_y)
 
-def get_middle((lo_x, lo_y, hi_x, hi_y)):
+def get_middle(xxx_todo_changeme5):
+    (lo_x, lo_y, hi_x, hi_y) = xxx_todo_changeme5
     width_all = hi_x - lo_x
     height_all = hi_y - lo_y
     middle_x = lo_x + (width_all * .5)
     middle_y = lo_x + (height_all * .5)
     return (middle_x, middle_y)
 
-def center_layers(g, layer_names, (middle_x, middle_y)):
+def center_layers(g, layer_names, xxx_todo_changeme6):
+    (middle_x, middle_y) = xxx_todo_changeme6
     for layer_name in layer_names:
         glyph = g.getLayer(layer_name)
         if glyph.box is not None:
@@ -349,17 +356,17 @@ def center_glyph_layers(g, layers, guides=True):
 #------------
 
 def check_lib(glyph):
-    if len(glyph.lib.keys()) > 0:
+    if len(list(glyph.lib.keys())) > 0:
         return True
-        print 'glyph libs:', g.lib.keys()
+        print('glyph libs:', list(g.lib.keys()))
     else:
-        print "glyph doesn't have any libs.\n"
+        print("glyph doesn't have any libs.\n")
         return False
 
 def clear_glyph_libs(glyph):
     """Delete all libs in ``glyph``."""
     if check_lib(glyph) is True:
-        for k in glyph.lib.keys():
+        for k in list(glyph.lib.keys()):
             del glyph.lib[k]
         glyph.update()
 
@@ -386,10 +393,10 @@ def equalize_bcps(glyph):
         for point in contour.bPoints:
             if point.selected:
                 x, y = point.bcpIn
-                if x <> 0:
+                if x != 0:
                     point.bcpIn = (x, 0)
                     point.bcpOut = (-x, 0)
-                if y <> 0:
+                if y != 0:
                     point.bcpIn = (0, y)
                     point.bcpOut = (0, -y)
     glyph.performUndo()

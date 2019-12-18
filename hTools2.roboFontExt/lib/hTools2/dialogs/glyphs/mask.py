@@ -86,7 +86,7 @@ class maskDialog(hDialog):
                 font[glyph_name].flipLayers('foreground', self.mask_layer)
                 # keep anchors from source layer in foreground
                 if not self.w.flip_anchors.get():
-                    if anchors_dict.has_key(glyph_name):
+                    if glyph_name in anchors_dict:
                         for anchor in anchors_dict[glyph_name]:
                             anchor_name, anchor_pos = anchor
                             font[glyph_name].appendAnchor(anchor_name, anchor_pos)
@@ -99,7 +99,7 @@ class maskDialog(hDialog):
             # done with font
             font.update()
         else:
-            print no_font_open
+            print(no_font_open)
 
     def _clear_callback(self, sender):
         font = CurrentFont()
@@ -111,7 +111,7 @@ class maskDialog(hDialog):
                 font[glyph_name].performUndo()
             font.update()
         else:
-            print no_font_open
+            print(no_font_open)
 
     def _copy_callback(self, sender):
         font = CurrentFont()
@@ -123,5 +123,5 @@ class maskDialog(hDialog):
                 font[glyph_name].update()
             # font.update()
         else:
-            print no_font_open
+            print(no_font_open)
 

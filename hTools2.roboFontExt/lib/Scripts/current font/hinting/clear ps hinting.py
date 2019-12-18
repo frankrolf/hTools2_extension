@@ -3,7 +3,7 @@ f = CurrentFont()
 clear_stems = True
 clear_blues = True
 
-print f.info.asDict()
+print(f.info.asDict())
 
 if clear_stems:
     f.info.postscriptStemSnapV = []

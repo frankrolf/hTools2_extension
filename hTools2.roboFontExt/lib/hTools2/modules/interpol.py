@@ -16,7 +16,7 @@ def interpolate_glyph(gName, f1, f2, f3, factor, clear=True):
     The optional parameter ``clear`` controls if existing glyphs in ``f3`` should be overwritten.
 
     """
-    if f2.has_key(gName):
+    if gName in f2:
         if clear:
             g = f3.newGlyph(gName, clear=True)
         else:
@@ -25,7 +25,7 @@ def interpolate_glyph(gName, f1, f2, f3, factor, clear=True):
         g.update()
         f3.update()
     else:
-        print 'glyph %s not contained in font 2' % gName
+        print('glyph %s not contained in font 2' % gName)
 
 def interpolate_kerning(f1, f2, f3, factor):
     k1 = f1.kerning
@@ -49,7 +49,7 @@ def check_compatibility(f1, f2, names=None, report=True):
     if names != None:
         gNames = names
     else:
-        gNames = f1.keys()
+        gNames = list(f1.keys())
     # colors
     clear_colors(f1)
     green = named_colors['green']
@@ -57,36 +57,36 @@ def check_compatibility(f1, f2, names=None, report=True):
     blue = named_colors['blue']
     # check glyphs
     if report == True:
-        print 'checking compatibility between %s and %s...\n' % (get_full_name(f1), get_full_name(f2))
+        print('checking compatibility between %s and %s...\n' % (get_full_name(f1), get_full_name(f2)))
     for name in gNames:
-        if f2.has_key(name):
+        if name in f2:
             clear_color(f2[name])
             # if not compatible
             if f1[name].isCompatible(f2[name], False) is not True:
                 f2[name].mark = red
                 if report == True:
-                    print "\t### %s is not compatible" % name
+                    print("\t### %s is not compatible" % name)
             # if compatible
             else:
                 f2[name].mark = green
                 if report == True:
-                    print "\t%s is compatible" % name
+                    print("\t%s is compatible" % name)
         # if glyphs not in f2
         else:
             f1[name].mark = blue
             if report == True:
-                print "\t### %s is not in font 2" % name
+                print("\t### %s is not in font 2" % name)
     # update fonts
     f2.update()
     f1.update()
     if report == True:
-        print '\n...done.\n'
+        print('\n...done.\n')
 
 def condense_glyphs(f3, f1, f2, f1_stem, f2_stem, factor, glyph_names):
     """Generate condensed glyphs from a 'Regular' font ``f1`` and a 'Bold' font ``f2``."""
     scale_x = float(f1_stem) / ( f1_stem + factor * (f2_stem - f1_stem ) )
     for glyph_name in glyph_names:
-        if not f3.has_key(glyph_name):
+        if glyph_name not in f3:
             f3.newGlyph(glyph_name)
         f3[glyph_name].prepareUndo('condensomatic')
         f3[glyph_name].interpolate((factor, 0), f1[glyph_name], f2[glyph_name])

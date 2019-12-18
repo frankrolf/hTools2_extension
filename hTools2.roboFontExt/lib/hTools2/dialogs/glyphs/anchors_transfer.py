@@ -107,17 +107,17 @@ class transferAnchorsDialog(hDialog):
             source_font = self.all_fonts[self.w._source_value.get()]
             target_font = self.all_fonts[self.w._target_value.get()]
             # print info
-            print 'transfering anchors...\n'
-            print '\tsource: %s' % get_full_name(source_font)
-            print '\ttarget: %s' % get_full_name(target_font)
-            print
-            print '\t',
+            print('transfering anchors...\n')
+            print('\tsource: %s' % get_full_name(source_font))
+            print('\ttarget: %s' % get_full_name(target_font))
+            print()
+            print('\t', end=' ')
             # batch transfer anchors
             skipped = []
             for glyph_name in get_glyphs(source_font):
                 if len(source_font[glyph_name].anchors) > 0:
-                    if target_font.has_key(glyph_name):
-                        print glyph_name,
+                    if glyph_name in target_font:
+                        print(glyph_name, end=' ')
                         # prepare undo
                         target_font[glyph_name].prepareUndo('transfer anchors')
                         # transfer anchors
@@ -132,13 +132,13 @@ class transferAnchorsDialog(hDialog):
                     # glyph does not have anchors
                     pass
             # done
-            print
+            print()
             target_font.update()
             if len(skipped) > 0:
-                print '\n\tglyphs %s not in target font.\n' % skipped
-            print '...done.\n'
+                print('\n\tglyphs %s not in target font.\n' % skipped)
+            print('...done.\n')
         else:
-            print no_font_open # 'please open at least one font.\n'
+            print(no_font_open) # 'please open at least one font.\n'
 
     def on_close_window(self, sender):
         removeObserver(self, "newFontDidOpen")

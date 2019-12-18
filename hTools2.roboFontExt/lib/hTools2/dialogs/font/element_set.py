@@ -1,10 +1,11 @@
 # [h] set element glyph in a font
 
 import hTools2.modules.rasterizer
-reload(hTools2.modules.rasterizer)
+import importlib
+importlib.reload(hTools2.modules.rasterizer)
 
 import hTools2.dialogs.misc
-reload(hTools2.dialogs.misc)
+importlib.reload(hTools2.dialogs.misc)
 
 # imports
 
@@ -95,7 +96,7 @@ class setElementDialog(hDialog):
             scale = float(self.w.spinner_size.value.get())
             magic = float(self.w.spinner_magic.value.get())
             # create element glyph
-            if not font.has_key(self.element_glyph):
+            if self.element_glyph not in font:
                 font.newGlyph(self.element_glyph)
             # draw element shape
             font[self.element_glyph].prepareUndo('set element')
@@ -103,4 +104,4 @@ class setElementDialog(hDialog):
             font[self.element_glyph].performUndo()
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)

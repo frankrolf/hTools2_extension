@@ -3,7 +3,8 @@
 """Create `top` and `bottom` anchors in selected glyphs."""
 
 import hTools2.modules.anchors
-reload(hTools2.modules.anchors)
+import importlib
+importlib.reload(hTools2.modules.anchors)
 
 # import
 
@@ -105,21 +106,21 @@ class createAnchorsDialog(hDialog):
             _accent       = self.w.accent.get()
             _clear        = self.w.clear.get()
 
-            print _top_delta, type(_top_delta)
-            print _bottom_delta, type(_bottom_delta)
+            print(_top_delta, type(_top_delta))
+            print(_bottom_delta, type(_bottom_delta))
 
             glyph_names = get_glyphs(f)
             if len(glyph_names) > 0:
 
                 if _clear:
-                    print 'removing anchors...\n'
+                    print('removing anchors...\n')
                     clear_anchors(f, glyph_names)
-                    print '...done.\n'
+                    print('...done.\n')
 
-                print 'creating anchors in glyphs...\n'
-                print '\t',
+                print('creating anchors in glyphs...\n')
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     f[glyph_name].prepareUndo('create anchors')
                     create_anchors(f[glyph_name],
                         top=_top,
@@ -129,13 +130,13 @@ class createAnchorsDialog(hDialog):
                         bottom_pos=_bottom_pos)
                     f[glyph_name].performUndo()
                 f.update()
-                print
-                print "\n...done.\n"
+                print()
+                print("\n...done.\n")
 
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
 
         else:
-            print no_font_open
+            print(no_font_open)
 
 

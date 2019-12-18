@@ -127,12 +127,12 @@ class copyToLayerDialog(hDialog):
                 for t in targets:
                     target_layers.append(self.layers[t])
                 # copy to selected layers
-                print 'copying glyphs between layers...\n'
-                print '\tsource layer: %s' % self.layers[source]
-                print '\ttarget layers: %s' % ' '.join(target_layers)
-                print
+                print('copying glyphs between layers...\n')
+                print('\tsource layer: %s' % self.layers[source])
+                print('\ttarget layers: %s' % ' '.join(target_layers))
+                print()
                 for glyph_name in glyph_names:
-                    print '\t%s' % glyph_name,
+                    print('\t%s' % glyph_name, end=' ')
                     source_glyph = self.font[glyph_name].getLayer(source_layer, clear=False)
                     for target_layer in target_layers:
                         target_glyph = self.font[glyph_name].getLayer(target_layer, clear=False)
@@ -142,14 +142,14 @@ class copyToLayerDialog(hDialog):
                         target_glyph.performUndo()
                         target_glyph.update()
                 # done
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def on_close_window(self, sender):
         removeObserver(self, "fontResignCurrent")

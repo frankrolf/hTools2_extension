@@ -19,4 +19,4 @@ if f is not None:
     mark_composed_glyphs(f)
 
 else:
-    print no_font_open
+    print(no_font_open)

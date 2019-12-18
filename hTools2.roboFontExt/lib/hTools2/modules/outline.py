@@ -41,7 +41,7 @@ def expand_font(src_font, distance, join=1, cap=1):
     # create a new empty font
     dst_font = NewFont(showUI=False)
     # expand all glyph
-    for glyph_name in src_font.keys():
+    for glyph_name in list(src_font.keys()):
         # get source glyph
         src_glyph = src_font[glyph_name]
         # get dest glyph

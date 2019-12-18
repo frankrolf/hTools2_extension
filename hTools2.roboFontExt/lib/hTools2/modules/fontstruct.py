@@ -17,11 +17,11 @@ class FontStructionHandler(ContentHandler):
     """FSML parser"""
 
     def __init__ (self):
-        print 'FSML parser'
+        print('FSML parser')
 
     def startElement(self, name, attrs):
         if name == 'fontstruction':
-            print "parsing fsml..."
+            print("parsing fsml...")
             # font info
             self.name = attrs.get('name')
             self.brick_scale_x = attrs.get('brick_scale_x')
@@ -66,26 +66,26 @@ class FontStructionHandler(ContentHandler):
         if name == 'glyph':
             self.glyphCount = self.glyphCount + 1
         if name == "fontstruction":
-            print "...done."
+            print("...done.")
 
     def printInfo(self):
-        print "FontStruction name: %s" % self.name
-        print "brick scale: %s, %s" % ( self.brick_scale_x, self.brick_scale_y )
-        print "glyphs: %s"  % len(self.glyphs)
+        print("FontStruction name: %s" % self.name)
+        print("brick scale: %s, %s" % ( self.brick_scale_x, self.brick_scale_y ))
+        print("glyphs: %s"  % len(self.glyphs))
 
     def printGlyphs(self):
-        for g in self.glyphs.keys():
-            print "glyph: %s" % g
-            print "codepoint: %s" % self.glyphs[g]['codepoint']
-            print "nodes: %s" % self.glyphs[g]['nodes']
-            print
+        for g in list(self.glyphs.keys()):
+            print("glyph: %s" % g)
+            print("codepoint: %s" % self.glyphs[g]['codepoint'])
+            print("nodes: %s" % self.glyphs[g]['nodes'])
+            print()
 
     def printBricks(self):
-        for b in self.bricks.keys():
-            print "brick: %s" % b
-            print "id: %s" % self.bricks[b]['id']
-            print "contours: %s" % self.bricks[b]['contours']
-            print
+        for b in list(self.bricks.keys()):
+            print("brick: %s" % b)
+            print("id: %s" % self.bricks[b]['id'])
+            print("contours: %s" % self.bricks[b]['contours'])
+            print()
 
     def createUFO(self):
         # create new font
@@ -93,7 +93,7 @@ class FontStructionHandler(ContentHandler):
         self.f.info.familyName = str(self.name)
 
     def importBricks(self):
-        for brickID in self.bricks.keys():
+        for brickID in list(self.bricks.keys()):
             # create element glyph
             gName = "element_%s" % str(brickID)
             self.f.newGlyph(gName, clear=True)
@@ -121,10 +121,10 @@ class FontStructionHandler(ContentHandler):
     def parseGlyphs(self):
         missingBricks = []
         eSize= 125
-        for g in self.glyphs.keys():
+        for g in list(self.glyphs.keys()):
             uni = int(self.glyphs[g]['codepoint'])
             # create empty glyph
-            if unicode2psnames.has_key(uni):
+            if uni in unicode2psnames:
                 gName = unicode2psnames[uni]
                 self.f.newGlyph(gName, clear=True)
                 # append modules
@@ -132,7 +132,7 @@ class FontStructionHandler(ContentHandler):
                     x, y = node[1][0]*eSize, node[1][1]*eSize
                     zeroPos = str(int(node[0])+1)
                     brickPos = zeroPos
-                    if self.slots.has_key(brickPos):
+                    if brickPos in self.slots:
                         componentName = "element_%s" % str(self.slots[brickPos]['brick_id'])
                         #self.f[componentName].mark = 170
                         self.f[componentName].update()
@@ -143,7 +143,7 @@ class FontStructionHandler(ContentHandler):
                         if brickPos not in missingBricks:
                             missingBricks.append(brickPos)
         self.f.update()
-        print "missing bricks: %s" % missingBricks
+        print("missing bricks: %s" % missingBricks)
 
 def openFontStruction(fsmlPath, verbose=False):
     """import fsml from path"""

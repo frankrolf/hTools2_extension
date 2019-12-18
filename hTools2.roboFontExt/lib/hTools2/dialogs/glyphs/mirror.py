@@ -40,7 +40,7 @@ class mirrorGlyphsDialog(hDialog):
                     (x, y,
                     self.button_size + 1,
                     self.button_size),
-                    '%s %s' % (unichr(8673), unichr(8675)),
+                    '%s %s' % (chr(8673), chr(8675)),
                     callback=self._up_callback)
         x += (self.button_size - 1)
         # flip vertically
@@ -48,7 +48,7 @@ class mirrorGlyphsDialog(hDialog):
                     (x, y,
                     self.button_size,
                     self.button_size),
-                    '%s %s' % (unichr(8672), unichr(8674)),
+                    '%s %s' % (chr(8672), chr(8674)),
                     callback=self._right_callback)
         # checkbox
         x = self.padding_x
@@ -80,7 +80,8 @@ class mirrorGlyphsDialog(hDialog):
     #     center = self._get_center(contour.box)
     #     contour.scale((scale_x, scale_y), center)
 
-    def _mirror_contours(self, contours, (scale_x, scale_y)):
+    def _mirror_contours(self, contours, xxx_todo_changeme):
+        (scale_x, scale_y) = xxx_todo_changeme
         _xMin = _yMin = 9999
         _xMax = _yMax = 0
         # get global box
@@ -100,7 +101,8 @@ class mirrorGlyphsDialog(hDialog):
         for contour in contours:
             contour.scale((scale_x, scale_y), center)
 
-    def _mirror_glyph(self, glyph, (scale_x, scale_y)):
+    def _mirror_glyph(self, glyph, xxx_todo_changeme1):
+        (scale_x, scale_y) = xxx_todo_changeme1
         if len(glyph.contours) > 0:
             selected = False
             glyph.prepareUndo('mirror')
@@ -120,15 +122,16 @@ class mirrorGlyphsDialog(hDialog):
             glyph.performUndo()
             glyph.update()
 
-    def _mirror_glyphs(self, (scale_x, scale_y)):
+    def _mirror_glyphs(self, xxx_todo_changeme2):
+        (scale_x, scale_y) = xxx_todo_changeme2
         f = CurrentFont()
         if f is not None:
             glyph_names = get_glyphs(f)
             if len(glyph_names):
-                print 'reflecting selected glyphs...\n'
-                print '\t',
+                print('reflecting selected glyphs...\n')
+                print('\t', end=' ')
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     # mirror all layers
                     if self.layers:
                         for layer_name in f.layerOrder:
@@ -141,14 +144,14 @@ class mirrorGlyphsDialog(hDialog):
                     f[glyph_name].update()
                 # done with font
                 f.update()
-                print
-                print '\n...done.\n'
+                print()
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def _right_callback(self, sender):
         self._mirror_glyphs((-1, 1))

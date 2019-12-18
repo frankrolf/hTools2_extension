@@ -31,17 +31,17 @@ def auto_unicode(g, custom_unicodes={}):
         # handle 'uni' names
         if g.name[:3] == "uni" and len(g.name) in [7, 8]:
             c = g.name
-            g.unicode = int(c.split('uni')[1], 16)
+            g.str = int(c.split('uni')[1], 16)
 
         # handle extra cases
-        elif g.name in unicodes_extra.keys():
+        elif g.name in list(unicodes_extra.keys()):
             uString = 'uni%s' % unicodes_extra[g.name]
-            g.unicode = unicode_hexstr_to_int(uString)
+            g.str = unicode_hexstr_to_int(uString)
 
         # use auto unicode for everything else
         elif custom_unicodes.get(g.name) is not None:
             uString = 'uni%s' % custom_unicodes[g.name]
-            g.unicode = unicode_hexstr_to_int(uString)
+            g.str = unicode_hexstr_to_int(uString)
         else:
             g.autoUnicodes()
 
@@ -914,7 +914,7 @@ unicode2psnames = {
 }
 
 #: A dictionary mapping psNames to unicode values.
-psnames2unicodes = dict([[v, k] for k, v in unicode2psnames.items()])
+psnames2unicodes = dict([[v, k] for k, v in list(unicode2psnames.items())])
 
 #----------------
 # unicode ranges

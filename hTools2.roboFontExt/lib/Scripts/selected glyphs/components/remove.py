@@ -3,7 +3,8 @@
 '''Remove components in selected glyphs.'''
 
 import hTools2.modules.glyphutils
-reload(hTools2.modules.glyphutils)
+import importlib
+importlib.reload(hTools2.modules.glyphutils)
 
 try:
     from mojo.roboFont import CurrentFont
@@ -26,7 +27,7 @@ if f is not None:
     glyph_names = get_glyphs(f)
     layer_names = f.layerOrder
     if len(glyph_names) > 0:
-        print 'removing components in selected glyphs...',
+        print('removing components in selected glyphs...', end=' ')
         for glyph_name in glyph_names:
             if foreground:
                 g = f[glyph_name]
@@ -39,10 +40,10 @@ if f is not None:
                     # g.prepareUndo('remove components')
                     remove_components(g)
                     # g.performUndo()
-        print 'done.\n'
+        print('done.\n')
     # no glyph selected
     else:
-        print no_glyph_selected
+        print(no_glyph_selected)
 # no font open
 else:
-    print no_font_open
+    print(no_font_open)

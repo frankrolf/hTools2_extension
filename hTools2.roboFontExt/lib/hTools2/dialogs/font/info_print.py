@@ -202,48 +202,48 @@ class clearFontInfoDialog(hDialog):
         self.get_font()
         if self.font is not None:
             self.get_values()
-            print 'clearing font info...\n'
+            print('clearing font info...\n')
             if self._generic_identification:
-                print '\tclear generic identification...'
+                print('\tclear generic identification...')
                 clear_generic_identification(self.font)
             if self._generic_legal:
-                print '\tclear generic legal...'
+                print('\tclear generic legal...')
                 clear_generic_legal(self.font)
             if self._generic_dimension:
-                print '\tclear generic dimension...'
+                print('\tclear generic dimension...')
                 clear_generic_dimension(self.font)
             if self._generic_miscellaneous:
-                print '\tclear generic miscellaneous...'
+                print('\tclear generic miscellaneous...')
                 clear_generic_miscellaneous(self.font)
             if self._opentype_head:
-                print '\tclear OpenType head...'
+                print('\tclear OpenType head...')
                 clear_opentype_head(self.font)
             if self._opentype_hhea:
-                print '\tclear OpenType hhea...'
+                print('\tclear OpenType hhea...')
                 clear_opentype_hhea(self.font)
             if self._opentype_name:
-                print '\tclear OpenType name...'
+                print('\tclear OpenType name...')
                 clear_opentype_name(self.font)
             if self._opentype_os2:
-                print '\tclear OpenType OS/2...'
+                print('\tclear OpenType OS/2...')
                 clear_opentype_os2(self.font)
             if self._opentype_vhea:
-                print '\tclear OpenType vhea...'
+                print('\tclear OpenType vhea...')
                 clear_opentype_vhea(self.font)
             if self._postscript_data:
-                print '\tclear PostScript data...'
+                print('\tclear PostScript data...')
                 clear_postscript_data(self.font)
-            print
+            print()
             self.font.update()
-            print '...done.\n'
+            print('...done.\n')
         else:
-            print no_font_open
+            print(no_font_open)
 
     def print_callback(self, sender):
         self.get_font()
         if self.font is not None:
             self.get_values()
-            print 'print font info...\n'
+            print('print font info...\n')
             if self._generic_identification:
                 print_generic_identification(self.font)
             if self._generic_legal:
@@ -264,8 +264,8 @@ class clearFontInfoDialog(hDialog):
                 print_opentype_vhea(self.font)
             if self._postscript_data:
                 print_postscript_data(self.font)
-            print
+            print()
             self.font.update()
-            print '...done.\n'
+            print('...done.\n')
         else:
-            print no_font_open
+            print(no_font_open)

@@ -94,12 +94,12 @@ class alignPointsDialog(hDialog):
         self.glyph = CurrentGlyph()
         # no glyph window open
         if self.glyph is None:
-            print no_glyph_open
+            print(no_glyph_open)
         else:
             # collect points
             self.points = []
             for c in self.glyph:
-                print c.selection
+                print(c.selection)
                 for p in c.points:
                     if p.selected:
                         self.points.append(p)
@@ -107,7 +107,7 @@ class alignPointsDialog(hDialog):
                         self.y_pos_list.append(p.y)
             # not enough points selected
             if len(self.points) < 2:
-                print at_least_two_points
+                print(at_least_two_points)
             else:
                 self._get_parameters()
                 self.glyph.prepareUndo('align points')

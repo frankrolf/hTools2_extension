@@ -106,14 +106,14 @@ class copyToMaskDialog(hDialog):
             glyph_names = get_glyphs(source_font)
             if len(glyph_names) > 0:
                 # print info
-                print 'copying glyphs to mask...\n'
-                print '\tsource font: %s (foreground)' % get_full_name(source_font)
-                print '\ttarget font: %s (%s)' % (get_full_name(target_font), self.target_layer_name)
-                print
-                print '\t',
+                print('copying glyphs to mask...\n')
+                print('\tsource font: %s (foreground)' % get_full_name(source_font))
+                print('\ttarget font: %s (%s)' % (get_full_name(target_font), self.target_layer_name))
+                print()
+                print('\t', end=' ')
                 # batch copy glyphs to mask
                 for glyph_name in glyph_names:
-                    print glyph_name,
+                    print(glyph_name, end=' ')
                     # prepare undo
                     target_font[glyph_name].prepareUndo('copy glyphs to mask')
                     # copy oulines to mask
@@ -125,15 +125,15 @@ class copyToMaskDialog(hDialog):
                     # activate undo
                     target_font[glyph_name].performUndo()
                 # done
-                print
+                print()
                 target_font.update()
-                print '\n...done.\n'
+                print('\n...done.\n')
             # no glyph selected
             else:
-                print no_glyph_selected
+                print(no_glyph_selected)
         # no font open
         else:
-            print no_font_open
+            print(no_font_open)
 
     def on_close_window(self, sender):
         # remove observers on close window

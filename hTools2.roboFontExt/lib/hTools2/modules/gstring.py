@@ -13,9 +13,9 @@ def make_string(names_list, spacer=None):
         _spacer = ''
     _string = _spacer
     for glyph_name in names_list:
-        for k in unicode2psnames.keys():
+        for k in list(unicode2psnames.keys()):
             if unicode2psnames[k] == glyph_name:
-                char = unichr(k)
+                char = chr(k)
                 _string = _string + char + _spacer
             else:
                 continue
