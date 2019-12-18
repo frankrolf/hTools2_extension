@@ -5,7 +5,7 @@ import sys
 
 from AppKit import *
 
-from lib.UI.fileBrowser import PathItem
+from lib.UI.fileBrowser import RFPathItem
 
 # add hTools2 to RoboFont main menu
 
@@ -13,7 +13,7 @@ def add_menu(name, path):
     # create a new menu
     menu = NSMenu.alloc().initWithTitle_(name)
     # create a path item that will build the menu and connect all the callbacks
-    pathItem = PathItem(path, [".py"], isRoot=True)
+    pathItem = RFPathItem(path, [".py"], isRoot=True)
     pathItem.getMenu(title=name, parentMenu=menu)
     # get the main menu
     menubar = NSApp().mainMenu()
