@@ -3,7 +3,7 @@
 try:
     from mojo.roboFont import AllFonts
 except ImportError:
-    from robofab.world import AllFonts
+    from fontParts.world import AllFonts
 
 from hTools2.modules.messages import no_font_open
 

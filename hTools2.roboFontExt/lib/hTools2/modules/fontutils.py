@@ -13,7 +13,7 @@ try:
     from lib.tools.defaults import getDefault
 
 except:
-    from robofab.world import CurrentGlyph, CurrentFont, NewFont
+    from fontParts.world import CurrentGlyph, CurrentFont, NewFont
 
 from hTools2.modules.glyphutils import round_points, round_width
 from hTools2.modules.color import *

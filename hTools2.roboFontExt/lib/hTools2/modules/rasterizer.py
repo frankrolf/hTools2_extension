@@ -12,7 +12,7 @@ try:
     from mojo.roboFont import NewFont
 
 except:
-    from robofab.world import NewFont
+    from fontParts.world import NewFont
 
 from hTools2.modules.primitives import oval, rect, element
 

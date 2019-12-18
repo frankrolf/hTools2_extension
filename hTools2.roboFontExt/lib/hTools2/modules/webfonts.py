@@ -26,7 +26,7 @@ try:
     from mojo.compile import executeCommand, hasTTFAutoHint
     from lib.tools.bezierTools import curveConverter
 except:
-    from robofab.world import OpenFont
+    from fontParts.world import OpenFont
 
 #--------------------
 # higher-level tools

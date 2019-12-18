@@ -13,7 +13,7 @@ try:
     from mojo.roboFont import CurrentFont, AllFonts, RFont
 
 except:
-    from robofab.world import CurrentFont, AllFonts, RFont
+    from fontParts.world import CurrentFont, AllFonts, RFont
 
 from dialogKit import *
 

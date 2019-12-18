@@ -5,7 +5,7 @@
 try:
     from mojo.roboFont import CurrentFont
 except ImportError:
-    from robofab.world import CurrentFont
+    from fontParts.world import CurrentFont
 
 from hTools2.modules.messages import no_font_open
 

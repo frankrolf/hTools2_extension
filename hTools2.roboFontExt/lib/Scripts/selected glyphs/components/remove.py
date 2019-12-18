@@ -9,7 +9,7 @@ importlib.reload(hTools2.modules.glyphutils)
 try:
     from mojo.roboFont import CurrentFont
 except:
-    from robofab.world import CurrentFont
+    from fontParts.world import CurrentFont
 
 from hTools2.modules.fontutils import get_glyphs
 from hTools2.modules.glyphutils import remove_components

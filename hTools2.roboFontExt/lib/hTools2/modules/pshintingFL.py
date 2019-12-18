@@ -9,7 +9,7 @@ Gustavo Ferreira (links), 2007-2008
 '''
 
 
-from robofab.world import CurrentFont, CurrentGlyph
+from fontParts.world import CurrentFont, CurrentGlyph
 from FL import Hint, Link
 
 

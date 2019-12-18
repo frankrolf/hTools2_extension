@@ -5,7 +5,7 @@
 from xml.sax.handler import ContentHandler
 from xml.sax import make_parser
 
-from robofab.world import NewFont
+from fontParts.world import NewFont
 
 from hTools2.modules.svg import svgImporter
 from hTools2.modules.encoding import unicode2psnames
